@@ -1,0 +1,28 @@
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script>
+document.querySelectorAll("table.datatable").forEach(t => new DataTable(t, { paging: false, info: false, scrollX: true }));
+
+document.addEventListener("click", e => {
+  const card = e.target.closest(".cell-card");
+  if (!card) return;
+  const dialog = document.getElementById("cell-dialog");
+  dialog.querySelector(".cell-viewer").src = card.dataset.glb;
+  dialog.querySelector(".cell-title").textContent = card.dataset.title;
+  dialog.showModal();
+});
+
+document.querySelectorAll(".nuclei-toggle").forEach(button => {
+  const viewer = document.getElementById(button.dataset.target);
+  button.addEventListener("click", () => {
+    const show = button.getAttribute("aria-pressed") !== "true";
+    button.setAttribute("aria-pressed", show);
+    button.textContent = show ? "Nuclei: shown" : "Nuclei: hidden";
+    for (const m of viewer.model.materials) {
+      if (!m.name.startsWith("nucleus")) continue;
+      const [r, g, b] = m.pbrMetallicRoughness.baseColorFactor;
+      m.pbrMetallicRoughness.setBaseColorFactor([r, g, b, show ? Number(button.dataset.opacity) : 0]);
+    }
+  });
+});
+</script>

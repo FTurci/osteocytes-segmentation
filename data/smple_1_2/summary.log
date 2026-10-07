@@ -1,0 +1,62 @@
+series        smple 1.2
+file          Texas red 20min_24.8.2026.lif
+written       2026-10-07T14:27:38
+voxel size    0.48147 µm (cubic; raw z step 0.30279 µm)
+volume        (48, 512, 512) voxels (z, y, x) = 23.1 x 246.5 x 246.5 µm
+
+== counts
+watershed regions                                                              79
+  >= 100 voxels and > 5 vox inside xy hull (pass 1)                            51
+  > 0 vox inside hull without soft tissue (pass 2)                             40
+  removed: far side of soft tissue                                              0
+  removed: no nucleus                                                          19
+  split by nuclei                                                               1
+  removed: flat                                                                 7
+surviving osteocytes                                                           15
+nuclei (cleaned ch0)                                                           57
+  inside hull, bone side                                                       42
+    detected                                                                   15
+    soft tissue                                                                 1
+    labelled, rejected                                                         16
+    no ch1 label                                                               10
+  inside hull, not labelled as osteocyte (rejected + no ch1)                   26
+
+== surviving osteocytes
+volume              mean 1519.8  sd 775.1 µm³
+dendrites per cell  mean 9.73  sd 5.36  (total 146; counted if reach >= 2.0 µm)
+dendrite reach      mean 5.02  sd 3.65 µm
+dendrite path       mean 9.61  sd 10.62 µm
+
+== parameters
+{
+ "SERIES": "smple 1.2",
+ "CH0_MIN_OBJECT_SIZE": 100,
+ "CH0_CLOSING_RADIUS": 3,
+ "CH0_EROSION_RADIUS": 1,
+ "CH0_MAX_NUCLEUS_SIZE": 3000,
+ "CH1_EROSION_RADIUS": 2,
+ "CH1_ERODED_THRESHOLD": 0.8,
+ "CH1_MAX_OSTEOCYTE_SIZE": 30000,
+ "CH1_FOREGROUND_THRESHOLD": 0.3,
+ "SOFT_TISSUE_MARGIN": 1,
+ "HULL_MIN_AREA": 100,
+ "HULL_MIN_DISTANCE_PASS_1": 5,
+ "HULL_MIN_DISTANCE_PASS_2": 0,
+ "MAX_SOFT_TISSUE_CROSSING": 25,
+ "NUCLEUS_MIN_VOXELS": 200,
+ "NUCLEUS_SPLIT_VOXELS": 800,
+ "BODY_SMOOTH_SIGMA": 1.5,
+ "PEAK_H": 1.5,
+ "ORPHAN_MIN_RADIUS": 3.5,
+ "MIN_FLATNESS": 0.4,
+ "DENDRITE_BODY_RADIUS": 2,
+ "DENDRITE_COUNT_REACH_UM": 2.0,
+ "DENDRITE_SPUR_UM": 1.5,
+ "NUCLEUS_OPACITY": 0.35,
+ "SAVE_TIFS": false,
+ "SAVE_MESHES": false,
+ "SAVE_RENDERINGS": true,
+ "RENDER_PAD": 5,
+ "RENDER_FRAMES": 36,
+ "SCALEBAR_UM": 10
+}

@@ -1,0 +1,274 @@
+---
+title: "Aggregate analysis"
+echo: false
+---
+
+All series pooled. Every chart is computed in the browser from `data/aggregate/`
+([osteocytes.csv](data/aggregate/osteocytes.csv), [dendrites.csv](data/aggregate/dendrites.csv),
+[series.csv](data/aggregate/series.csv)), regenerated whenever a series is imported.
+Hover any mark for its values.
+
+```{ojs}
+osteocytes = FileAttachment("data/aggregate/osteocytes.csv").csv({typed: true})
+dendrites = FileAttachment("data/aggregate/dendrites.csv").csv({typed: true})
+seriesTable = FileAttachment("data/aggregate/series.csv").csv({typed: true})
+seriesNames = seriesTable.map(d => d.series)
+
+// validated categorical slots (scatter: 3 slots all-pairs; stacked bars: 4 adjacent)
+SLOT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
+INK = ({primary: "#0b0b0b", secondary: "#52514e", muted: "#898781", context: "#c3c2b7", surface: "#fcfcfb"})
+
+VARLIST = [
+  {key: "volume_um3", label: "Volume (µm³)", log: true},
+  {key: "surface_area_um2", label: "Surface area (µm²)", log: true},
+  {key: "axis_1_um", label: "Longest axis (µm)"},
+  {key: "axis_ratio_2_1", label: "Axis ratio 2:1"},
+  {key: "flatness", label: "Flatness"},
+  {key: "Solidity", label: "Solidity"},
+  {key: "nucleus_volume_um3", label: "Nucleus volume (µm³)"},
+  {key: "n_dendrites", label: "Dendrites per cell"},
+  {key: "mean_dendrite_reach_um", label: "Mean dendrite reach (µm)"},
+  {key: "max_dendrite_reach_um", label: "Max dendrite reach (µm)"},
+  {key: "total_dendrite_path_um", label: "Total dendrite path (µm)", log: true},
+]
+byKey = Object.fromEntries(VARLIST.map(v => [v.key, v]))
+valid = (d, v) => Number.isFinite(d[v.key]) && (!v.log || d[v.key] > 0)
+```
+
+```{ojs}
+tiles = {
+  const nuc = d3.sum(seriesTable, d => d.nuclei_in_hull);
+  const missing = d3.sum(seriesTable, d => d.labelled_rejected + d.no_ch1);
+  const tile = (label, value, note) => htl.html`<div class="stat-tile">
+    <div class="stat-label">${label}</div><div class="stat-value">${value}</div><div class="stat-note">${note}</div></div>`;
+  return htl.html`<div class="stat-row">
+    ${tile("Series", seriesTable.length, "")}
+    ${tile("Osteocytes", d3.sum(seriesTable, d => d.osteocytes), "surviving all filters")}
+    ${tile("Dendrites", d3.sum(seriesTable, d => d.dendrites), "reach ≥ 2 µm")}
+    ${tile("Nuclei not labelled", d3.format(".0%")(missing / nuc), `${missing} of ${nuc} inside the hulls`)}
+  </div>`;
+}
+```
+
+## Nuclei inside the hull
+
+What happened to each cleaned ch0 nucleus on the bone side of each series:
+inside a surviving osteocyte, inside a ch1 region the filters rejected, without ch1 signal (dye did not reach it), or in soft tissue.
+
+```{ojs}
+CENSUS = [
+  {key: "detected", label: "In an osteocyte"},
+  {key: "labelled_rejected", label: "In a rejected ch1 region"},
+  {key: "no_ch1", label: "No ch1 signal"},
+  {key: "soft_tissue", label: "Soft tissue"},
+]
+censusLong = seriesTable.flatMap(d => CENSUS.map(c => ({series: d.series, class: c.label, n: d[c.key], total: d.nuclei_in_hull})))
+
+Plot.plot({
+  width, height: 40 + 34 * seriesNames.length, marginLeft: 190, marginRight: 70,
+  x: {label: "Share of nuclei inside the hull", tickFormat: "%", grid: true},
+  y: {label: null, domain: seriesNames},
+  color: {domain: CENSUS.map(c => c.label), range: SLOT, legend: true},
+  marks: [
+    Plot.barX(censusLong, Plot.stackX({
+      x: "n", y: "series", fill: "class", offset: "normalize", order: CENSUS.map(c => c.label),
+      insetLeft: 1, insetRight: 1, rx: 2,
+      tip: {format: {x: false, fill: true, n: true, total: true}}, channels: {n: {value: "n", label: "nuclei"}, total: {value: "total", label: "in hull"}}
+    })),
+    Plot.text(seriesTable, {x: 1, y: "series", text: d => `n = ${d.nuclei_in_hull}`, dx: 8, textAnchor: "start", fill: INK.secondary})
+  ]
+})
+```
+
+<details><summary>Table</summary>
+
+```{ojs}
+Inputs.table(seriesTable, {
+  columns: ["series", "osteocytes", "dendrites", "nuclei_in_hull", "detected", "labelled_rejected", "no_ch1", "soft_tissue"],
+  header: {nuclei_in_hull: "nuclei in hull", labelled_rejected: "in rejected ch1 region", no_ch1: "no ch1 signal", soft_tissue: "soft tissue"},
+  rows: 12
+})
+```
+
+</details>
+
+## Per-osteocyte distributions
+
+One dot per osteocyte; the black tick is the series median.
+
+```{ojs}
+viewof distVar = Inputs.select(VARLIST, {label: "Quantity", format: v => v.label, value: byKey.volume_um3})
+```
+
+```{ojs}
+{
+  const v = distVar;
+  const rows = osteocytes.filter(d => valid(d, v));
+  const medians = d3.rollups(rows, g => d3.median(g, d => d[v.key]), d => d.series).map(([series, median]) => ({series, median}));
+  return Plot.plot({
+    width, height: 30 + 64 * seriesNames.length, marginLeft: 190,
+    x: {type: v.log ? "log" : "linear", label: v.label, grid: true, nice: true, ticks: v.log ? 5 : undefined,
+        tickFormat: v.log ? "~s" : undefined},
+    fy: {domain: seriesNames, label: null},
+    marks: [
+      Plot.dot(rows, Plot.dodgeY("middle", {
+        fy: "series", x: v.key, r: 4, fill: SLOT[0], stroke: INK.surface, strokeWidth: 1.5,
+        tip: true, channels: {osteocyte: "label", series: "series"}
+      })),
+      Plot.tickX(medians, {fy: "series", x: "median", stroke: INK.primary, strokeWidth: 2})
+    ]
+  });
+}
+```
+
+## Dendrites
+
+All counted dendrites, one histogram per series, normalised within each series.
+
+```{ojs}
+DENDVARS = [
+  {key: "reach_um", label: "Reach beyond the cell body (µm)"},
+  {key: "path_um", label: "Skeleton path length (µm)"},
+  {key: "n_tips", label: "Tips (branching)"},
+]
+viewof dendVar = Inputs.radio(DENDVARS, {label: "Quantity", format: v => v.label, value: DENDVARS[0]})
+viewof dendPct = Inputs.range([50, 100], {label: "Show up to percentile", step: 0.5, value: 98})
+viewof dendBins = Inputs.range([10, 80], {label: "Bins", step: 1, value: 30})
+```
+
+```{ojs}
+dendView = {
+  const v = dendVar;
+  const rows = dendrites.filter(d => Number.isFinite(d[v.key]));
+  const values = rows.map(d => d[v.key]).sort(d3.ascending);
+  const integer = values.every(Number.isInteger);
+  const lo = values[0];
+  let hi = d3.quantileSorted(values, dendPct / 100);
+  // integer counts: one bin per value, centred on it; continuous: equal-width bins over the shown range
+  const thresholds = integer
+    ? d3.range(lo - 0.5, Math.ceil(hi) + 1, Math.max(1, Math.ceil((Math.ceil(hi) - lo + 1) / dendBins)))
+    : d3.range(dendBins + 1).map(i => lo + (hi - lo) * i / dendBins);
+  hi = thresholds[thresholds.length - 1];
+  // weight = 1 / dendrites in the series, so each bar is a share of that series' dendrites whatever the range
+  const total = d3.rollup(rows, g => g.length, d => d.series);
+  const shown = rows.filter(d => d[v.key] <= hi).map(d => ({...d, w: 1 / total.get(d.series)}));
+  return {v, shown, thresholds, lo: thresholds[0], hi, integer, hidden: rows.length - shown.length, n: rows.length};
+}
+```
+
+```{ojs}
+md`${dendView.hidden} of ${dendView.n} dendrites (${d3.format(".1%")(dendView.hidden / dendView.n)}) lie beyond ${d3.format(".3~f")(dendView.hi)} and are not drawn; bars are shares of all dendrites in the series.`
+```
+
+```{ojs}
+Plot.plot({
+  width, height: 30 + 64 * seriesNames.length, marginLeft: 190,
+  x: {label: dendView.v.label, grid: true, domain: [dendView.lo, dendView.hi]},
+  y: {axis: null},
+  fy: {domain: seriesNames, label: null},
+  marks: [
+    Plot.rectY(dendView.shown, Plot.binX({y: "sum"}, {
+      x: dendView.v.key, y: "w", fy: "series", fill: SLOT[0], insetLeft: 1, insetRight: 1,
+      thresholds: dendView.thresholds, tip: {format: {y: ".1%"}}
+    })),
+    Plot.ruleY([0], {stroke: INK.context})
+  ]
+})
+```
+
+## Pair plot
+
+Up to three series in colour (fixed slots A, B, C, so a series keeps its colour while you change the others); the rest in grey for context.
+
+```{ojs}
+ranked = d3.sort(seriesTable, d => -d.osteocytes).map(d => d.series)
+swatch = (i, text) => htl.html`<span><span style="color:${SLOT[i]}; font-size: 1.2em">●</span> ${text}</span>`
+viewof pairVars = Inputs.checkbox(VARLIST, {
+  label: "Quantities", format: v => v.label,
+  value: [byKey.volume_um3, byKey.axis_ratio_2_1, byKey.n_dendrites, byKey.mean_dendrite_reach_um]
+})
+viewof slotA = Inputs.select(["(none)", ...seriesNames], {label: swatch(0, "Series A"), value: ranked[0]})
+viewof slotB = Inputs.select(["(none)", ...seriesNames], {label: swatch(1, "Series B"), value: ranked[1] ?? "(none)"})
+viewof slotC = Inputs.select(["(none)", ...seriesNames], {label: swatch(2, "Series C"), value: ranked[2] ?? "(none)"})
+viewof showOthers = Inputs.toggle({label: "Other series in grey", value: true})
+```
+
+```{ojs}
+pairplot = {
+  const vars = pairVars;
+  if (vars.length < 2) return htl.html`<p><em>Select at least two quantities.</em></p>`;
+  const colorOf = new Map([slotA, slotB, slotC].map((s, i) => [s, SLOT[i]]).filter(([s]) => s !== "(none)"));
+  const shown = osteocytes.filter(d => colorOf.has(d.series) || showOthers);
+  const hi = shown.filter(d => colorOf.has(d.series));
+  const lo = shown.filter(d => !colorOf.has(d.series));
+  const color = {domain: [...colorOf.keys()], range: [...colorOf.values()]};
+
+  const domain = v => {
+    const [a, b] = d3.extent(shown.filter(d => valid(d, v)), d => d[v.key]);
+    if (a === undefined) return [0, 1];
+    if (v.log) return [a / 1.15, b * 1.15];
+    const pad = (b - a || 1) * 0.06;
+    return [a - pad, b + pad];
+  };
+  const thresholds = (v, [a, b]) => v.log
+    ? d3.range(21).map(i => a * Math.pow(b / a, i / 20))
+    : d3.range(21).map(i => a + (b - a) * i / 20);
+
+  const n = vars.length, gap = 6, ml = 58, mb = 40;
+  const cell = Math.max(140, Math.floor((width - ml - n * gap) / n));
+  const cells = [];
+  vars.forEach((yv, i) => vars.forEach((xv, j) => {
+    const left = j === 0, bottom = i === n - 1;
+    const xs = {type: xv.log ? "log" : "linear", domain: domain(xv), axis: bottom ? "bottom" : null,
+                label: bottom ? xv.label : null, ticks: 4, grid: true, tickFormat: xv.log ? "~s" : undefined};
+    const frame = {width: cell + (left ? ml : 0) + 6, height: cell + (bottom ? mb : 0) + 6,
+                   marginLeft: left ? ml : 0, marginRight: 6, marginTop: 6, marginBottom: bottom ? mb : 0, style: {overflow: "visible"}};
+    if (i === j) {
+      const dom = domain(xv), th = thresholds(xv, dom);
+      const vals = shown.filter(d => valid(d, xv));
+      cells.push(Plot.plot({...frame, x: xs, y: {axis: null}, color, marks: [
+        Plot.rectY(vals, Plot.binX({y: "count"}, {x: xv.key, thresholds: th, fill: INK.context, insetLeft: 0.5, insetRight: 0.5})),
+        Plot.lineY(vals.filter(d => colorOf.has(d.series)), Plot.binX({y: "count"},
+          {x: xv.key, thresholds: th, stroke: "series", strokeWidth: 2, curve: "step"})),
+        Plot.text([xv.label], {frameAnchor: "top-left", dx: 4, dy: 4, fill: INK.primary, fontWeight: 600}),
+        Plot.frame({stroke: INK.context})
+      ]}));
+    } else {
+      cells.push(Plot.plot({...frame, x: xs, color,
+        y: {type: yv.log ? "log" : "linear", domain: domain(yv), axis: left ? "left" : null,
+            label: left ? yv.label : null, ticks: 4, grid: true, tickFormat: yv.log ? "~s" : undefined},
+        marks: [
+          Plot.frame({stroke: INK.context}),
+          Plot.dot(lo.filter(d => valid(d, xv) && valid(d, yv)), {x: xv.key, y: yv.key, r: 3, fill: INK.context, fillOpacity: 0.8}),
+          Plot.dot(hi.filter(d => valid(d, xv) && valid(d, yv)), {x: xv.key, y: yv.key, r: 4, fill: "series",
+            stroke: INK.surface, strokeWidth: 1.5, tip: true, channels: {series: "series", osteocyte: "label"}})
+        ]}));
+    }
+  }));
+  const legend = htl.html`<div class="pair-legend">${[...colorOf].map(([s, c]) =>
+      htl.html`<span><span class="sw" style="background:${c}"></span>${s}</span>`)}${showOthers && lo.length
+      ? htl.html`<span><span class="sw" style="background:${INK.context}"></span>other series</span>` : ""}</div>`;
+  return htl.html`<div>${legend}<div class="pair-grid" style="grid-template-columns: repeat(${n}, auto); gap: ${gap}px">${cells}</div></div>`;
+}
+```
+
+## Per-series summary
+
+Mean ± sd over osteocytes. Sample sizes differ widely between series; compare with care where *n* is small.
+
+```{ojs}
+summaryRows = {
+  const keys = ["volume_um3", "axis_ratio_2_1", "flatness", "n_dendrites", "mean_dendrite_reach_um", "nucleus_volume_um3"];
+  const fmt = (g, k) => {
+    const v = g.map(d => d[k]).filter(Number.isFinite);
+    if (!v.length) return "";
+    const m = d3.mean(v), s = d3.deviation(v);
+    const f = Math.abs(m) >= 100 ? d3.format(",.0f") : d3.format(".2f");
+    return s === undefined ? f(m) : `${f(m)} ± ${f(s)}`;
+  };
+  return d3.groups(osteocytes, d => d.series).map(([series, g]) => ({
+    series, n: g.length, ...Object.fromEntries(keys.map(k => [byKey[k].label, fmt(g, k)]))
+  }));
+}
+Inputs.table(summaryRows, {rows: 12})
+```

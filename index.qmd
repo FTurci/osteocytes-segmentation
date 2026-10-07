@@ -1,0 +1,35 @@
+---
+title: "Osteocyte segmentation"
+---
+
+3D segmentation of osteocytes in confocal stacks of bone (`Texas red 20min_24.8.2026.lif`):
+nuclei in channel 0, dye-filled lacuno-canalicular network in channel 1.
+Each series page has the whole scene in 3D, the per-osteocyte measurements and a gallery of every cell.
+
+## Series
+
+{{< include _series_index.md >}}
+
+*Nuclei in hull*: cleaned ch0 nuclei inside the edge-filter hull, on the bone side of the soft tissue.
+*Nuclei not labelled*: those not inside a surviving osteocyte and not in soft tissue,
+either inside a ch1 region the filters rejected or without ch1 signal (dye did not reach them).
+
+## Measurements
+
+| column | definition |
+|:--|:--|
+| `volume_um3`, `surface_area_um2` | region volume; area of the marching-cubes mesh (overestimates a smooth surface by a few %) |
+| `axis_1/2/3_um` | full axes of the solid ellipsoid with the region's second moments, $2\sqrt{5\lambda_k}$, longest first |
+| `flatness` | $\sqrt{\lambda_3/\lambda_2}$: ~0 for a sheet, ~1 for a sphere or rod |
+| `n_nuclei`, `nucleus_volume_um3` | nuclei with most of their volume inside the region; nucleus voxels inside it |
+| `n_dendrites` | protrusions beyond the cell body (opening by a ball of 2 voxels) reaching ≥ 2 µm |
+| `reach_um` | farthest distance of a dendrite from the body surface; the robust length measure |
+| `path_um` | skeleton length of a dendrite beyond the body, branches summed, spurs < 1.5 µm pruned; unreliable for short, thick processes |
+
+Per-dendrite values are in each series' `dendrites.csv` (column `label` is the osteocyte), all pipeline parameters in `summary.json`.
+
+## Adding a series
+
+1. Export it from `segment_pipeline_interactive.ipynb` (Export button).
+2. `python scripts/import_series.py <folder with the export> "<series name>"`: copies it to `data/<tag>/` and regenerates the pages
+3. `quarto render` (or `quarto preview`), then commit `data/<tag>/`, `series/` and `_series_index.md`
