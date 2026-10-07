@@ -1,0 +1,9 @@
+series,tag,voxel_size_um,osteocytes,dendrites,nuclei_in_hull,detected,labelled_rejected,no_ch1,soft_tissue
+sample 1.1,sample_1_1,0.4814710371819961,41,263,91,39,23,21,8
+sample 1.3,sample_1_3,0.4814710371819961,16,117,31,16,6,9,0
+sample 1.4,sample_1_4,0.4814710371819961,40,336,80,39,13,15,13
+sample 2.1_ultrasonic cleaned,sample_2_1_ultrasonic_cleaned,0.4814710371819961,21,151,35,21,5,6,3
+sample 3.1,sample_3_1,0.4814710371819961,23,133,43,23,9,10,1
+sample 3.2,sample_3_2,0.44709745596868883,27,131,57,26,4,5,22
+sample 4.1,sample_4_1,0.44709745596868883,13,63,23,12,2,5,4
+smple 1.2,smple_1_2,0.4814710371819961,15,146,42,15,16,10,1
