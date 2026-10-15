@@ -924,16 +924,20 @@ Table&nbsp;6: Dendrites per cell in four size classes (quartiles of body volume,
 </section>
 <section id="where-are-the-cells" class="level3">
 <h3 class="anchored" data-anchor-id="where-are-the-cells">Where are the cells?</h3>
-<p>Within each stack, positions are taken in the image plane relative to the long axis of the bone section seen in the stack. That section is approximated by the convex hull of the cells’ centroids and dendrite tips; its axis is the principal axis of the filled hull. A cell’s <strong>relative radial position</strong> is</p>
+<p>Each stack images part of a roughly cylindrical piece of bone. Within a stack, the <strong>axis</strong> is the principal axis of the 3D cell centroids: the line minimising their summed squared distances, <span class="math inline">\(\hat{\mathbf{a}}\)</span> through the mean <span class="math inline">\(\mathbf{c}\)</span>. In every stack it lies within 5° of the image plane. A cell’s position is the <strong>3D distance of its centroid from the axis</strong>:</p>
 <p><span class="math display">\[
-r = \frac{\text{distance of the centroid from the axis}}{\text{distance from the axis to the hull boundary, same direction}},
+\rho = \bigl\lVert (\mathbf{x} - \mathbf{c}) - [(\mathbf{x} - \mathbf{c})\cdot\hat{\mathbf{a}}]\,\hat{\mathbf{a}} \bigr\rVert .
 \]</span></p>
-<p>from 0 on the axis to 1 at the edge.</p>
-<p><strong>The reference.</strong> The room available at each <span class="math inline">\(r\)</span> depends on the hull’s shape. Around a line (not a point) it is largest near the axis for a rounded hull, and flat for a rectangular one. Each group is therefore compared with points placed uniformly in the same hulls, weighted by how many of the group’s cells each stack contributes. The transform <span class="math inline">\(u = F_0(r)\)</span>, with <span class="math inline">\(F_0\)</span> that reference distribution, is uniform if cells sit where uniform placement would put them. Here the hulls are close to rectangular, so the reference is almost the diagonal.</p>
+<p><strong>Uniform placement.</strong> Raw distances mislead in two ways, and the reference corrects for both.</p>
+<ul>
+<li><strong>Room grows with distance.</strong> The tissue volume at distance <span class="math inline">\(\rho\)</span> grows like <span class="math inline">\(2\pi\rho\)</span>, the circumference, so more cells fit far from the axis. In our stacks the growth stops beyond about the half-depth of the stack, where its top and bottom cut the circles.</li>
+<li><strong>The axis is fitted to the cells.</strong> It passes through them by construction, which by itself pulls cells towards it.</li>
+</ul>
+<p>The reference therefore places the same number of cells uniformly in each stack’s imaged tissue, refits the axis to them, and repeats this 400 times. The imaged tissue is the in-plane hull of the centroids and dendrite tips, times the stack depth.</p>
 <div id="tbl-location" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7: Radial position by tag. <em>Uniform placement</em>: cells placed uniformly in the same hulls; <em>inner half</em>: below that reference’s median, 50% expected.
+Table&nbsp;7: Distance of the centroids from the stack’s axis, by tag. <em>Uniform placement</em>: the same number of cells placed uniformly in the imaged tissue of each stack, axis refitted to them; 50% of cells closer than its median expected.
 </figcaption>
 <div aria-describedby="tbl-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -949,9 +953,9 @@ Table&nbsp;7: Radial position by tag. <em>Uniform placement</em>: cells placed u
 <tr class="header">
 <th style="text-align: left;">group</th>
 <th style="text-align: right;">cells</th>
-<th style="text-align: right;">median radial position</th>
-<th style="text-align: right;">median, uniform placement</th>
-<th style="text-align: right;">share in the inner half of the reference</th>
+<th style="text-align: right;">median distance from axis (µm)</th>
+<th style="text-align: right;">median, uniform placement (µm)</th>
+<th style="text-align: right;">share closer than uniform placement’s median</th>
 <th style="text-align: right;">KS p vs uniform placement</th>
 </tr>
 </thead>
@@ -959,32 +963,32 @@ Table&nbsp;7: Radial position by tag. <em>Uniform placement</em>: cells placed u
 <tr class="odd">
 <td style="text-align: left;">elongated</td>
 <td style="text-align: right;">105</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.50</td>
-<td style="text-align: right;">51%</td>
-<td style="text-align: right;">0.587</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">18.9</td>
+<td style="text-align: right;">50%</td>
+<td style="text-align: right;">0.137</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">round</td>
 <td style="text-align: right;">47</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">20.0</td>
 <td style="text-align: right;">62%</td>
-<td style="text-align: right;">0.141</td>
+<td style="text-align: right;">0.165</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>Round minus elongated, mean radial position: -0.051 (within-stack permutation p = 0.247, Cliff’s δ = -0.11).</p>
+<p>Round minus elongated, mean distance from the axis: -0.2 µm (within-stack permutation p = 0.919, Cliff’s δ = +0.00).</p>
 <div id="fig-location" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="preliminary/location.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Left: cumulative radial position by tag (solid) and for uniform placement in the same stacks (dotted). Right: the same positions relative to uniform placement; 1 = as many cells as uniform placement predicts.
+Figure&nbsp;4: Left: cumulative distance from the axis by tag (solid) and for uniform placement in the same stacks (dotted). Right: number density in 5 µm shells around the axis, cells per tissue volume (solid), and what uniform placement gives (dotted).
 </figcaption>
 </figure>
 </div>
@@ -994,15 +998,14 @@ Figure&nbsp;4: Left: cumulative radial position by tag (solid) and for uniform p
 <img src="preliminary/location_maps.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Each stack in the image plane (µm): hull (grey), axis (dashed), cells coloured by tag (grey: untyped).
+Figure&nbsp;5: Each stack in the image plane (µm): tissue hull (grey), axis (dashed, projected), cells coloured by tag (grey: untyped).
 </figcaption>
 </figure>
 </div>
 <ul>
-<li><strong>No clear radial pattern.</strong> Elongated cells sit as uniform placement predicts. Round cells lean slightly towards the axis: their median is 0.41 against 0.49, and they are scarce in the outermost fifth.</li>
-<li><strong>Within-stack comparison.</strong> The difference is small and within what tag shuffling inside stacks produces.</li>
-<li><strong>Small numbers.</strong> With 47 round cells, a modest preference for the interior can be neither shown nor excluded.</li>
-<li><strong>Positions are 2D, and the “axis” is a geometric proxy.</strong> The 3D anatomy is unknown: whether the axis follows a cortex, a trabecula or the bone surface is not established.</li>
+<li><strong>No radial pattern.</strong> Both groups follow uniform placement closely, and round and elongated cells sit at the same distances from the axis.</li>
+<li><strong>The fitted-axis effect explains the apparent central excess.</strong> Density is highest near the axis in the right panel, but uniform placement reproduces this. Without the refit, the cells would have looked significantly concentrated around the axis (KS p ≈ 0.002).</li>
+<li><strong>The tissue is approximated.</strong> The hull of the cells times the stack depth stands in for the bone. The cylinder’s real surface and the bone surface are not known.</li>
 </ul>
 </section>
 </section>
@@ -1157,7 +1160,7 @@ Figure&nbsp;6: Left: gaps between all pairs of neighbouring cells (orange: the 1
 <li><strong>Round cells have more dendrites</strong> (median 10 vs 6), mostly because they are bigger. At equal size the difference vanishes for small cells. Among larger cells, round ones tend to have a few more (<a href="#fig-dendrites" class="quarto-xref">Figure&nbsp;3</a>), but this rests on a handful of very branched cells: it is suggestive, not established. Dendrite <em>length</em> (reach, process fraction) and <em>arrangement</em> (starriness) do not differ.</li>
 <li><strong>No discrete phenotypes.</strong> Size and dendrite count give one continuous population with the round cells shifted within it, not two clusters. The manual tags capture a real gradient: they are recovered with AUC ≈ 0.85, well above chance and short of perfect.</li>
 <li><strong>Nucleus volume and solidity do not differ.</strong></li>
-<li><strong>No clear radial pattern.</strong> Round cells lean slightly towards the axis of the section, but not beyond chance at this sample size.</li>
+<li><strong>No radial pattern.</strong> Distances of the cells from the bone axis match uniform placement once tissue volume and the fitted axis are accounted for, and round and elongated cells do not differ.</li>
 <li><strong>Most cells are connected to neighbours.</strong> About 80% of kept cells are linked to at least one other, almost always process to process. Groups contain up to 23 cells, so the segmented cells form networks rather than isolated units.</li>
 </ul>
 </section>
