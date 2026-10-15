@@ -256,6 +256,7 @@ window.Quarto = {
   <li><a href="#feature-by-feature" id="toc-feature-by-feature" class="nav-link" data-scroll-target="#feature-by-feature">Feature by feature</a></li>
   <li><a href="#do-size-and-dendrite-count-alone-give-two-groups" id="toc-do-size-and-dendrite-count-alone-give-two-groups" class="nav-link" data-scroll-target="#do-size-and-dendrite-count-alone-give-two-groups">Do size and dendrite count alone give two groups?</a></li>
   <li><a href="#more-dendrites-or-just-bigger-cells" id="toc-more-dendrites-or-just-bigger-cells" class="nav-link" data-scroll-target="#more-dendrites-or-just-bigger-cells">More dendrites, or just bigger cells?</a></li>
+  <li><a href="#where-are-the-cells" id="toc-where-are-the-cells" class="nav-link" data-scroll-target="#where-are-the-cells">Where are the cells?</a></li>
   </ul></li>
   <li><a href="#connected-cells" id="toc-connected-cells" class="nav-link" data-scroll-target="#connected-cells">Connected cells</a>
   <ul class="collapse">
@@ -921,6 +922,89 @@ Table&nbsp;6: Dendrites per cell in four size classes (quartiles of body volume,
 <li><strong>The groups overlap throughout.</strong> In the largest class, much of the difference comes from about six round cells with 16–22 dendrites, while the rest overlap the elongated ones. Large cells are also where merged cells, segmentation leftovers and the annotator seeing many dendrites are most likely to play a part.</li>
 </ul>
 </section>
+<section id="where-are-the-cells" class="level3">
+<h3 class="anchored" data-anchor-id="where-are-the-cells">Where are the cells?</h3>
+<p>Within each stack, positions are taken in the image plane relative to the long axis of the bone section seen in the stack. That section is approximated by the convex hull of the cells’ centroids and dendrite tips; its axis is the principal axis of the filled hull. A cell’s <strong>relative radial position</strong> is</p>
+<p><span class="math display">\[
+r = \frac{\text{distance of the centroid from the axis}}{\text{distance from the axis to the hull boundary, same direction}},
+\]</span></p>
+<p>from 0 on the axis to 1 at the edge.</p>
+<p><strong>The reference.</strong> The room available at each <span class="math inline">\(r\)</span> depends on the hull’s shape. Around a line (not a point) it is largest near the axis for a rounded hull, and flat for a rectangular one. Each group is therefore compared with points placed uniformly in the same hulls, weighted by how many of the group’s cells each stack contributes. The transform <span class="math inline">\(u = F_0(r)\)</span>, with <span class="math inline">\(F_0\)</span> that reference distribution, is uniform if cells sit where uniform placement would put them. Here the hulls are close to rectangular, so the reference is almost the diagonal.</p>
+<div id="tbl-location" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7: Radial position by tag. <em>Uniform placement</em>: cells placed uniformly in the same hulls; <em>inner half</em>: below that reference’s median, 50% expected.
+</figcaption>
+<div aria-describedby="tbl-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">group</th>
+<th style="text-align: right;">cells</th>
+<th style="text-align: right;">median radial position</th>
+<th style="text-align: right;">median, uniform placement</th>
+<th style="text-align: right;">share in the inner half of the reference</th>
+<th style="text-align: right;">KS p vs uniform placement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">elongated</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">51%</td>
+<td style="text-align: right;">0.587</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">round</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">62%</td>
+<td style="text-align: right;">0.141</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Round minus elongated, mean radial position: -0.051 (within-stack permutation p = 0.247, Cliff’s δ = -0.11).</p>
+<div id="fig-location" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="preliminary/location.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Left: cumulative radial position by tag (solid) and for uniform placement in the same stacks (dotted). Right: the same positions relative to uniform placement; 1 = as many cells as uniform placement predicts.
+</figcaption>
+</figure>
+</div>
+<div id="fig-maps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="preliminary/location_maps.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Each stack in the image plane (µm): hull (grey), axis (dashed), cells coloured by tag (grey: untyped).
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>No clear radial pattern.</strong> Elongated cells sit as uniform placement predicts. Round cells lean slightly towards the axis: their median is 0.41 against 0.49, and they are scarce in the outermost fifth.</li>
+<li><strong>Within-stack comparison.</strong> The difference is small and within what tag shuffling inside stacks produces.</li>
+<li><strong>Small numbers.</strong> With 47 round cells, a modest preference for the interior can be neither shown nor excluded.</li>
+<li><strong>Positions are 2D, and the “axis” is a geometric proxy.</strong> The 3D anatomy is unknown: whether the axis follows a cortex, a trabecula or the bone surface is not established.</li>
+</ul>
+</section>
 </section>
 <section id="connected-cells" class="level2">
 <h2 class="anchored" data-anchor-id="connected-cells">Connected cells</h2>
@@ -934,7 +1018,7 @@ Table&nbsp;6: Dendrites per cell in four size classes (quartiles of body volume,
 <div id="tbl-connectivity" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-connectivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7: Cells linked to at least one other (gap ≤ 1.5 µm), per stack.
+Table&nbsp;8: Cells linked to at least one other (gap ≤ 1.5 µm), per stack.
 </figcaption>
 <div aria-describedby="tbl-connectivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1033,7 +1117,7 @@ Table&nbsp;7: Cells linked to at least one other (gap ≤ 1.5 µm), per stack.
 <img src="preliminary/connectivity.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-connectivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Left: gaps between all pairs of neighbouring cells (orange: the 1.5 µm tolerance). Middle: share of cells linked to another, as the tolerance varies. Right: linked neighbours per cell, by tag (bars: medians).
+Figure&nbsp;6: Left: gaps between all pairs of neighbouring cells (orange: the 1.5 µm tolerance). Middle: share of cells linked to another, as the tolerance varies. Right: linked neighbours per cell, by tag (bars: medians).
 </figcaption>
 </figure>
 </div>
@@ -1073,6 +1157,7 @@ Figure&nbsp;4: Left: gaps between all pairs of neighbouring cells (orange: the 1
 <li><strong>Round cells have more dendrites</strong> (median 10 vs 6), mostly because they are bigger. At equal size the difference vanishes for small cells. Among larger cells, round ones tend to have a few more (<a href="#fig-dendrites" class="quarto-xref">Figure&nbsp;3</a>), but this rests on a handful of very branched cells: it is suggestive, not established. Dendrite <em>length</em> (reach, process fraction) and <em>arrangement</em> (starriness) do not differ.</li>
 <li><strong>No discrete phenotypes.</strong> Size and dendrite count give one continuous population with the round cells shifted within it, not two clusters. The manual tags capture a real gradient: they are recovered with AUC ≈ 0.85, well above chance and short of perfect.</li>
 <li><strong>Nucleus volume and solidity do not differ.</strong></li>
+<li><strong>No clear radial pattern.</strong> Round cells lean slightly towards the axis of the section, but not beyond chance at this sample size.</li>
 <li><strong>Most cells are connected to neighbours.</strong> About 80% of kept cells are linked to at least one other, almost always process to process. Groups contain up to 23 cells, so the segmented cells form networks rather than isolated units.</li>
 </ul>
 </section>
