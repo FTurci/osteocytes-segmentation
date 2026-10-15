@@ -178,35 +178,43 @@ What the plots show:
 
 ### Where are the cells?
 
-Within each stack, positions are taken in the image plane relative to the long axis of the bone section seen in the
-stack. That section is approximated by the convex hull of the cells' centroids and dendrite tips; its axis is the
-principal axis of the filled hull. A cell's **relative radial position** is
+Each stack images part of a roughly cylindrical piece of bone. Within a stack, the **axis** is the principal axis
+of the 3D cell centroids: the line minimising their summed squared distances, $\hat{\mathbf{a}}$ through the mean
+$\mathbf{c}$. In every stack it lies within 5° of the image plane. A cell's position is the **3D distance of its
+centroid from the axis**:
 
 $$
-r = \frac{\text{distance of the centroid from the axis}}{\text{distance from the axis to the hull boundary, same direction}},
+\rho = \bigl\lVert (\mathbf{x} - \mathbf{c}) - [(\mathbf{x} - \mathbf{c})\cdot\hat{\mathbf{a}}]\,\hat{\mathbf{a}} \bigr\rVert .
 $$
 
-from 0 on the axis to 1 at the edge.
+**Uniform placement.** Raw distances mislead in two ways, and the reference corrects for both.
 
-**The reference.** The room available at each $r$ depends on the hull's shape. Around a line (not a point) it is
-largest near the axis for a rounded hull, and flat for a rectangular one. Each group is therefore compared with
-points placed uniformly in the same hulls, weighted by how many of the group's cells each stack contributes. The
-transform $u = F_0(r)$, with $F_0$ that reference distribution, is uniform if cells sit where uniform placement would
-put them. Here the hulls are close to rectangular, so the reference is almost the diagonal.
+- **Room grows with distance.** The tissue volume at distance $\rho$ grows like $2\pi\rho$, the circumference, so
+  more cells fit far from the axis. In our stacks the growth stops beyond about the half-depth of the stack, where
+  its top and bottom cut the circles.
+- **The axis is fitted to the cells.** It passes through them by construction, which by itself pulls cells
+  towards it.
+
+The reference therefore places the same number of cells uniformly in each stack's imaged tissue, refits the axis
+to them, and repeats this 400 times. The imaged tissue is the in-plane hull of the centroids and dendrite tips,
+times the stack depth.
 
 {{< include preliminary/_location.md >}}
 
-![Left: cumulative radial position by tag (solid) and for uniform placement in the same stacks (dotted). Right: the
-same positions relative to uniform placement; 1 = as many cells as uniform placement predicts.](preliminary/location.png){#fig-location}
+![Left: cumulative distance from the axis by tag (solid) and for uniform placement in the same stacks (dotted).
+Right: number density in 5 µm shells around the axis, cells per tissue volume (solid), and what uniform placement
+gives (dotted).](preliminary/location.png){#fig-location}
 
-![Each stack in the image plane (µm): hull (grey), axis (dashed), cells coloured by tag (grey: untyped).](preliminary/location_maps.png){#fig-maps}
+![Each stack in the image plane (µm): tissue hull (grey), axis (dashed, projected), cells coloured by tag (grey:
+untyped).](preliminary/location_maps.png){#fig-maps}
 
-- **No clear radial pattern.** Elongated cells sit as uniform placement predicts. Round cells lean slightly towards
-  the axis: their median is 0.41 against 0.49, and they are scarce in the outermost fifth.
-- **Within-stack comparison.** The difference is small and within what tag shuffling inside stacks produces.
-- **Small numbers.** With 47 round cells, a modest preference for the interior can be neither shown nor excluded.
-- **Positions are 2D, and the "axis" is a geometric proxy.** The 3D anatomy is unknown: whether the axis follows a
-  cortex, a trabecula or the bone surface is not established.
+- **No radial pattern.** Both groups follow uniform placement closely, and round and elongated cells sit at the
+  same distances from the axis.
+- **The fitted-axis effect explains the apparent central excess.** Density is highest near the axis in the right
+  panel, but uniform placement reproduces this. Without the refit, the cells would have looked significantly
+  concentrated around the axis (KS p ≈ 0.002).
+- **The tissue is approximated.** The hull of the cells times the stack depth stands in for the bone. The cylinder's
+  real surface and the bone surface are not known.
 
 ## Connected cells
 
@@ -261,7 +269,7 @@ spheres near-contacts. Drag to rotate and scroll to zoom. The meshes are simplif
   within it, not two clusters. The manual tags capture a real gradient: they are recovered with AUC ≈ 0.85, well
   above chance and short of perfect.
 - **Nucleus volume and solidity do not differ.**
-- **No clear radial pattern.** Round cells lean slightly towards the axis of the section, but not beyond chance at this sample size.
+- **No radial pattern.** Distances of the cells from the bone axis match uniform placement once tissue volume and the fitted axis are accounted for, and round and elongated cells do not differ.
 - **Most cells are connected to neighbours.** About 80% of kept cells are linked to at least one other, almost always
   process to process. Groups contain up to 23 cells, so the segmented cells form networks rather than isolated units.
 

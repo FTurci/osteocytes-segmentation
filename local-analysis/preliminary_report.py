@@ -6,6 +6,7 @@ Reads ../data/aggregate/ and the manual tags (annotations.csv, blob_review.csv);
 figures (PNG) and the markdown fragments the page includes (_*.md). Re-run after re-tagging or re-importing series,
 then re-read the page's prose, which states the conclusions in words.
 """
+import json
 import sys
 
 import numpy as np
@@ -20,8 +21,8 @@ from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.multitest import multipletests
 
 import connectivity
-from osteo_common import (GROUP_COLOURS, INK, HERE, add_features, add_positions, clean, cliffs_delta, load,
-                          radial_positions, series_tag, style, uniform_in_hull, within_series_permutation)
+from osteo_common import (GROUP_COLOURS, INK, HERE, add_features, clean, cliffs_delta, load, series_tag, style,
+                          uniform_in_hull, within_series_permutation)
 
 OUT = HERE.parent / "preliminary"
 SEED = 20261015
@@ -29,6 +30,7 @@ N_PERM = 10000
 N_BOOT = 2000
 MATCH_TOLERANCE = 0.25  # relative body-volume difference for a size-matched pair
 LINK_GAP_UM = 1.5       # two cells are linked when the gap between their masks is at most this
+N_NULL = 400           # simulated uniform placements per stack for the location reference
 MIN_GROUP_3D = 5        # groups with at least this many cells get a 3D model on the page
 DECIMATE = 0.75         # share of mesh triangles removed in the group models (the per-cell GLBs are dense)
 # 3 shades per tag, cycled over a group's cells so that neighbours with the same tag stay distinguishable
@@ -156,54 +158,98 @@ def group_model(series, labels, kept, contacts, path):
     path.write_bytes(export_glb(scene, include_normals=True))
 
 
+def stack_axis(points):
+    """Centre and unit direction (z, y, x) of the 3D principal axis of a point cloud."""
+    centre = points.mean(0)
+    return centre, np.linalg.eigh(np.cov((points - centre).T))[1][:, -1]
+
+
+def axis_distance(points, centre, axis):
+    rel = points - centre
+    return np.linalg.norm(rel - np.outer(rel @ axis, axis), axis=1)
+
+
 def location_section(kept, dendrites, rng):
-    """Radial position of round and elongated cells relative to each stack's hull axis, against the positions
-    uniformly placed cells would have in the same hull."""
+    """3D distance of each cell's centroid from its stack's axis, against cells placed uniformly in the imaged tissue.
+
+    Axis: principal axis of the stack's 3D cell centroids. Imaged tissue: the in-plane convex hull of the centroids
+    and dendrite tips times the stack depth. The reference places the same number of cells uniformly in that tissue
+    and refits the axis to them every time: an axis fitted to the cells passes through them by construction, which
+    alone pulls cells towards it. Tissue volume at distance rho grows like 2 pi rho near the axis and stops growing
+    where the top and bottom of the stack cut the circles."""
     from scipy import stats
+    from scipy.spatial import ConvexHull
 
-    located, geometry = add_positions(kept, kept, dendrites, rng)
-    g = located[(located["phenotype"] != "") & located["radial_position"].notna()].copy()
+    zyx = [f"centroid_{a}_um" for a in "zyx"]
+    g = kept[kept["phenotype"] != ""].copy()
     g["is_round"] = g["phenotype"] == "round"
-    # reference: radial positions of points uniform in each stack's hull; u = F0(r) is uniform under that null
-    reference = {s: np.sort(radial_positions(uniform_in_hull(pts, hull, rng, 50000), centre, axis, hull)[0])
-                 for s, (centre, axis, hull, pts) in geometry.items()}
-    g["u"] = [np.searchsorted(reference[s], r) / len(reference[s]) for s, r in zip(g["series"], g["radial_position"])]
+    g["rho_um"] = np.nan
+    null, shell, geometry = {}, {}, {}
+    bins = np.arange(0, 75, 5.0)
+    for s in kept["series"].unique():
+        members = kept[kept["series"] == s]
+        tips = dendrites[(dendrites["series"] == s) & dendrites["label"].isin(members["label"])]
+        cen = members[zyx].to_numpy()
+        tissue = np.vstack([cen, tips[["tip_z_um", "tip_y_um", "tip_x_um"]].to_numpy()])
+        meta = json.loads((HERE.parent / "data" / series_tag(s) / "summary.json").read_text())
+        depth = meta["shape_zyx"][0] * meta["voxel_size_um"]
+        hull = ConvexHull(tissue[:, 1:])
+        uniform = lambda n: np.column_stack([rng.uniform(0, depth, n), uniform_in_hull(tissue[:, 1:], hull, rng, 4 * n)[:n]])
+        centre, axis = stack_axis(cen)
+        sims = []
+        for _ in range(N_NULL):
+            q = uniform(len(cen))
+            sims.append(axis_distance(q, *stack_axis(q)))
+        null[s] = np.sort(np.concatenate(sims))
+        big = uniform(100000)
+        shell[s] = hull.volume * depth * np.histogram(axis_distance(big, centre, axis), bins)[0] / len(big)
+        geometry[s] = (centre, axis, hull, tissue)
+        idx = g.index[g["series"] == s]
+        g.loc[idx, "rho_um"] = axis_distance(g.loc[idx, zyx].to_numpy(), centre, axis)
+    g["u"] = [np.searchsorted(null[s], r) / len(null[s]) for s, r in zip(g["series"], g["rho_um"])]
 
-    diff, p = within_series_permutation(g["radial_position"], g["is_round"], g["series"], rng, N_PERM)
-    e, r = g.loc[~g["is_round"], "radial_position"], g.loc[g["is_round"], "radial_position"]
-    delta = cliffs_delta(e, r)
+    diff, p = within_series_permutation(g["rho_um"], g["is_round"], g["series"], rng, N_PERM)
+    delta = cliffs_delta(g.loc[~g["is_round"], "rho_um"], g.loc[g["is_round"], "rho_um"])
     rows = []
     for k in GROUPS:
         d = g[g["phenotype"] == k]
-        rows.append({"group": k, "cells": len(d), "median radial position": f"{d['radial_position'].median():.2f}",
-                     "median, uniform placement": f"{np.median([np.median(reference[s]) for s in d['series']]):.2f}",
-                     "share in the inner half of the reference": f"{(d['u'] < 0.5).mean():.0%}",
+        ref_median = np.median(np.concatenate([rng.choice(null[s], 2000) for s in d["series"]]))
+        rows.append({"group": k, "cells": len(d), "median distance from axis (µm)": f"{d['rho_um'].median():.1f}",
+                     "median, uniform placement (µm)": f"{ref_median:.1f}",
+                     "share closer than uniform placement's median": f"{(d['u'] < 0.5).mean():.0%}",
                      "KS p vs uniform placement": fmt_p(stats.kstest(d["u"], "uniform").pvalue)})
     table = pd.DataFrame(rows)
     (OUT / "_location.md").write_text(
-        md_table(table) + "\n: Radial position by tag. *Uniform placement*: cells placed uniformly in the same hulls; "
-        "*inner half*: below that reference's median, 50% expected. {#tbl-location}\n\n"
-        f"Round minus elongated, mean radial position: {diff:+.3f} (within-stack permutation p = {fmt_p(p)}, "
+        md_table(table) + "\n: Distance of the centroids from the stack's axis, by tag. *Uniform placement*: the same "
+        "number of cells placed uniformly in the imaged tissue of each stack, axis refitted to them; 50% of cells "
+        "closer than its median expected. {#tbl-location}\n\n"
+        f"Round minus elongated, mean distance from the axis: {diff:+.1f} µm (within-stack permutation p = {fmt_p(p)}, "
         f"Cliff's δ = {delta:+.2f}).\n")
 
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(10, 3.8))
-    grid = np.linspace(0, 1, 201)
+    mids = (bins[:-1] + bins[1:]) / 2
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(10, 3.9))
     for k in GROUPS:
         d = g[g["phenotype"] == k]
-        v = np.sort(d["radial_position"])
+        v = np.sort(d["rho_um"])
         ax.step(v, np.arange(1, len(v) + 1) / len(v), where="post", color=GROUP_COLOURS[k], lw=2,
                 label=f"{k} (n = {len(v)})")
-        w = d["series"].value_counts(normalize=True)
-        ref = sum(w[s] * np.searchsorted(reference[s], grid) / len(reference[s]) for s in w.index)
-        ax.plot(grid, ref, ":", color=GROUP_COLOURS[k], lw=1.4)
-        ax2.hist(d["u"], bins=np.linspace(0, 1, 6), histtype="step", lw=2, color=GROUP_COLOURS[k], density=True)
+        n_s = d["series"].value_counts()
+        ax.plot(bins, sum(n * np.searchsorted(null[s], bins) / len(null[s]) for s, n in n_s.items()) / len(d),
+                ":", color=GROUP_COLOURS[k], lw=1.4)
+        # number density in shells around the axis: cells over tissue volume, summed over the group's stacks
+        vol = sum(shell[s] for s in n_s.index)
+        ok = vol > 0.02 * vol.sum()
+        dens = lambda counts: np.where(ok, counts / np.where(ok, vol, 1) * 1e5, np.nan)
+        expected = sum(n * np.histogram(null[s], bins)[0] / len(null[s]) for s, n in n_s.items())
+        ax2.step(mids, dens(np.histogram(d["rho_um"], bins)[0]), where="mid", color=GROUP_COLOURS[k], lw=2)
+        ax2.plot(mids, dens(expected), ":", color=GROUP_COLOURS[k], lw=1.4)
     ax.plot([], [], ":", color=INK["muted"], label="uniform placement, same stacks")
-    ax.set(xlabel="relative radial position (0 = axis, 1 = hull)", ylabel="cumulative share of cells", xlim=(0, 1))
-    ax.set_title("Radial position", loc="left")
+    xmax = bins[np.flatnonzero(sum(shell.values()) > 0)[-1] + 1]
+    ax.set(xlabel="distance of the centroid from the axis (µm)", ylabel="cumulative share of cells", xlim=(0, xmax))
+    ax.set_title("Distance from the axis", loc="left")
     ax.legend(loc="lower right", fontsize=8)
-    ax2.axhline(1, color=INK["muted"], ls=":", lw=1.4)
-    ax2.set(xlabel="position relative to uniform placement, $F_0(r)$", ylabel="density (1 = as uniform)", xlim=(0, 1))
-    ax2.set_title("Over- and under-occupancy", loc="left")
+    ax2.set(xlabel="distance of the centroid from the axis (µm)", ylabel="cells per 10⁵ µm³ of tissue", xlim=(0, xmax))
+    ax2.set_title("Number density in 5 µm shells", loc="left")
     fig.tight_layout()
     fig.savefig(OUT / "location.png")
     plt.close(fig)
@@ -211,14 +257,16 @@ def location_section(kept, dendrites, rng):
     n = len(geometry)
     fig, axes = plt.subplots(2, int(np.ceil(n / 2)), figsize=(12, 6.2), squeeze=False)
     for ax, (s, (centre, axis, hull, pts)) in zip(axes.flat, sorted(geometry.items())):
-        ax.fill(pts[hull.vertices, 1], pts[hull.vertices, 0], color=INK["grid"], zorder=0)
-        span = np.linalg.norm(pts.max(0) - pts.min(0)) / 2
-        ends = centre + np.outer([-span, span], axis)
+        yx = pts[:, 1:]
+        ax.fill(yx[hull.vertices, 1], yx[hull.vertices, 0], color=INK["grid"], zorder=0)
+        span = np.linalg.norm(yx.max(0) - yx.min(0)) / 2
+        a2 = axis[1:] / np.linalg.norm(axis[1:])
+        ends = centre[1:] + np.outer([-span, span], a2)
         ax.plot(ends[:, 1], ends[:, 0], color=INK["primary"], lw=1.2, ls="--")
-        c = located[located["series"] == s]
-        colour = c["phenotype"].map(GROUP_COLOURS).fillna(INK["context"]).where(c["phenotype"] != "", INK["context"])
+        c = kept[kept["series"] == s]
+        colour = [GROUP_COLOURS.get(t, INK["context"]) for t in c["phenotype"]]
         ax.scatter(c["centroid_x_um"], c["centroid_y_um"], c=colour, s=18, edgecolor="white", lw=0.5, zorder=3)
-        ax.set_title(s, loc="left", fontsize=9)
+        ax.set_title(f"{s}  (axis tilt {np.degrees(np.arcsin(abs(axis[0]))):.0f}° out of plane)", loc="left", fontsize=8.5)
         ax.set_aspect("equal")
         ax.invert_yaxis()
         ax.tick_params(labelsize=7)
@@ -227,7 +275,7 @@ def location_section(kept, dendrites, rng):
     fig.tight_layout()
     fig.savefig(OUT / "location_maps.png")
     plt.close(fig)
-    print(f"location: round - elongated {diff:+.3f}, p = {p:.3f}")
+    print(f"location: round - elongated {diff:+.2f} µm, p = {p:.3f}")
     print(table.to_string(index=False))
 
 
