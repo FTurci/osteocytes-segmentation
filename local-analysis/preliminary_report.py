@@ -20,8 +20,8 @@ from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.multitest import multipletests
 
 import connectivity
-from osteo_common import (GROUP_COLOURS, INK, HERE, add_features, clean, cliffs_delta, load, series_tag, style,
-                          within_series_permutation)
+from osteo_common import (GROUP_COLOURS, INK, HERE, add_features, add_positions, clean, cliffs_delta, load,
+                          radial_positions, series_tag, style, uniform_in_hull, within_series_permutation)
 
 OUT = HERE.parent / "preliminary"
 SEED = 20261015
@@ -154,6 +154,81 @@ def group_model(series, labels, kept, contacts, path):
             name = f"{'contact' if touching else 'near'}_{i}"
             scene.add_geometry(ball, geom_name=name, node_name=name)
     path.write_bytes(export_glb(scene, include_normals=True))
+
+
+def location_section(kept, dendrites, rng):
+    """Radial position of round and elongated cells relative to each stack's hull axis, against the positions
+    uniformly placed cells would have in the same hull."""
+    from scipy import stats
+
+    located, geometry = add_positions(kept, kept, dendrites, rng)
+    g = located[(located["phenotype"] != "") & located["radial_position"].notna()].copy()
+    g["is_round"] = g["phenotype"] == "round"
+    # reference: radial positions of points uniform in each stack's hull; u = F0(r) is uniform under that null
+    reference = {s: np.sort(radial_positions(uniform_in_hull(pts, hull, rng, 50000), centre, axis, hull)[0])
+                 for s, (centre, axis, hull, pts) in geometry.items()}
+    g["u"] = [np.searchsorted(reference[s], r) / len(reference[s]) for s, r in zip(g["series"], g["radial_position"])]
+
+    diff, p = within_series_permutation(g["radial_position"], g["is_round"], g["series"], rng, N_PERM)
+    e, r = g.loc[~g["is_round"], "radial_position"], g.loc[g["is_round"], "radial_position"]
+    delta = cliffs_delta(e, r)
+    rows = []
+    for k in GROUPS:
+        d = g[g["phenotype"] == k]
+        rows.append({"group": k, "cells": len(d), "median radial position": f"{d['radial_position'].median():.2f}",
+                     "median, uniform placement": f"{np.median([np.median(reference[s]) for s in d['series']]):.2f}",
+                     "share in the inner half of the reference": f"{(d['u'] < 0.5).mean():.0%}",
+                     "KS p vs uniform placement": fmt_p(stats.kstest(d["u"], "uniform").pvalue)})
+    table = pd.DataFrame(rows)
+    (OUT / "_location.md").write_text(
+        md_table(table) + "\n: Radial position by tag. *Uniform placement*: cells placed uniformly in the same hulls; "
+        "*inner half*: below that reference's median, 50% expected. {#tbl-location}\n\n"
+        f"Round minus elongated, mean radial position: {diff:+.3f} (within-stack permutation p = {fmt_p(p)}, "
+        f"Cliff's δ = {delta:+.2f}).\n")
+
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(10, 3.8))
+    grid = np.linspace(0, 1, 201)
+    for k in GROUPS:
+        d = g[g["phenotype"] == k]
+        v = np.sort(d["radial_position"])
+        ax.step(v, np.arange(1, len(v) + 1) / len(v), where="post", color=GROUP_COLOURS[k], lw=2,
+                label=f"{k} (n = {len(v)})")
+        w = d["series"].value_counts(normalize=True)
+        ref = sum(w[s] * np.searchsorted(reference[s], grid) / len(reference[s]) for s in w.index)
+        ax.plot(grid, ref, ":", color=GROUP_COLOURS[k], lw=1.4)
+        ax2.hist(d["u"], bins=np.linspace(0, 1, 6), histtype="step", lw=2, color=GROUP_COLOURS[k], density=True)
+    ax.plot([], [], ":", color=INK["muted"], label="uniform placement, same stacks")
+    ax.set(xlabel="relative radial position (0 = axis, 1 = hull)", ylabel="cumulative share of cells", xlim=(0, 1))
+    ax.set_title("Radial position", loc="left")
+    ax.legend(loc="lower right", fontsize=8)
+    ax2.axhline(1, color=INK["muted"], ls=":", lw=1.4)
+    ax2.set(xlabel="position relative to uniform placement, $F_0(r)$", ylabel="density (1 = as uniform)", xlim=(0, 1))
+    ax2.set_title("Over- and under-occupancy", loc="left")
+    fig.tight_layout()
+    fig.savefig(OUT / "location.png")
+    plt.close(fig)
+
+    n = len(geometry)
+    fig, axes = plt.subplots(2, int(np.ceil(n / 2)), figsize=(12, 6.2), squeeze=False)
+    for ax, (s, (centre, axis, hull, pts)) in zip(axes.flat, sorted(geometry.items())):
+        ax.fill(pts[hull.vertices, 1], pts[hull.vertices, 0], color=INK["grid"], zorder=0)
+        span = np.linalg.norm(pts.max(0) - pts.min(0)) / 2
+        ends = centre + np.outer([-span, span], axis)
+        ax.plot(ends[:, 1], ends[:, 0], color=INK["primary"], lw=1.2, ls="--")
+        c = located[located["series"] == s]
+        colour = c["phenotype"].map(GROUP_COLOURS).fillna(INK["context"]).where(c["phenotype"] != "", INK["context"])
+        ax.scatter(c["centroid_x_um"], c["centroid_y_um"], c=colour, s=18, edgecolor="white", lw=0.5, zorder=3)
+        ax.set_title(s, loc="left", fontsize=9)
+        ax.set_aspect("equal")
+        ax.invert_yaxis()
+        ax.tick_params(labelsize=7)
+    for ax in axes.flat[n:]:
+        ax.set_visible(False)
+    fig.tight_layout()
+    fig.savefig(OUT / "location_maps.png")
+    plt.close(fig)
+    print(f"location: round - elongated {diff:+.3f}, p = {p:.3f}")
+    print(table.to_string(index=False))
 
 
 def connectivity_section(kept, rng):
@@ -437,6 +512,7 @@ def main():
     fig.savefig(OUT / "dendrites_by_size.png")
     plt.close(fig)
 
+    location_section(kept, dendrites, rng)
     connectivity_section(kept, rng)
 
     sig = tests[tests["p_holm"] < 0.05]

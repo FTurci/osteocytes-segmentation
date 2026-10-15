@@ -132,11 +132,22 @@ def hull_axis_positions(points, query, rng, n_samples=20000):
     """Main axis of the filled 2D hull of points, then each query point's relative radial position
     (distance from the axis / distance from the axis to the hull boundary on its side) and distance (µm)."""
     hull = ConvexHull(points)
-    tri = Delaunay(points[hull.vertices])
-    samples = rng.uniform(points.min(0), points.max(0), size=(n_samples, points.shape[1]))
-    samples = samples[tri.find_simplex(samples) >= 0]
+    samples = uniform_in_hull(points, hull, rng, n_samples)
     centre = samples.mean(0)
     axis = np.linalg.eigh(np.cov((samples - centre).T))[1][:, -1]
+    r, d = radial_positions(query, centre, axis, hull)
+    return r, d, (centre, axis, hull, points)
+
+
+def uniform_in_hull(points, hull, rng, n_samples=20000):
+    """Points drawn uniformly inside the convex hull (rejection sampling from the bounding box)."""
+    tri = Delaunay(points[hull.vertices])
+    samples = rng.uniform(points.min(0), points.max(0), size=(n_samples, points.shape[1]))
+    return samples[tri.find_simplex(samples) >= 0]
+
+
+def radial_positions(query, centre, axis, hull):
+    """Relative radial position and distance from the axis (see hull_axis_positions)."""
     foot = centre + np.outer((query - centre) @ axis, axis)
     radial = query - foot
     d = np.linalg.norm(radial, axis=1)
@@ -144,7 +155,7 @@ def hull_axis_positions(points, query, rng, n_samples=20000):
     normals, offsets = hull.equations[:, :-1], hull.equations[:, -1]
     nu = u @ normals.T
     t = -(foot @ normals.T + offsets) / np.where(nu > 1e-12, nu, np.nan)
-    return d / np.nanmin(np.where(t > 0, t, np.nan), axis=1), d, (centre, axis, hull, points)
+    return d / np.nanmin(np.where(t > 0, t, np.nan), axis=1), d
 
 
 def add_positions(cells, all_cells, dendrites, rng):

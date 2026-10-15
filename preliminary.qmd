@@ -176,6 +176,38 @@ What the plots show:
   with 16–22 dendrites, while the rest overlap the elongated ones. Large cells are also where merged cells,
   segmentation leftovers and the annotator seeing many dendrites are most likely to play a part.
 
+### Where are the cells?
+
+Within each stack, positions are taken in the image plane relative to the long axis of the bone section seen in the
+stack. That section is approximated by the convex hull of the cells' centroids and dendrite tips; its axis is the
+principal axis of the filled hull. A cell's **relative radial position** is
+
+$$
+r = \frac{\text{distance of the centroid from the axis}}{\text{distance from the axis to the hull boundary, same direction}},
+$$
+
+from 0 on the axis to 1 at the edge.
+
+**The reference.** The room available at each $r$ depends on the hull's shape. Around a line (not a point) it is
+largest near the axis for a rounded hull, and flat for a rectangular one. Each group is therefore compared with
+points placed uniformly in the same hulls, weighted by how many of the group's cells each stack contributes. The
+transform $u = F_0(r)$, with $F_0$ that reference distribution, is uniform if cells sit where uniform placement would
+put them. Here the hulls are close to rectangular, so the reference is almost the diagonal.
+
+{{< include preliminary/_location.md >}}
+
+![Left: cumulative radial position by tag (solid) and for uniform placement in the same stacks (dotted). Right: the
+same positions relative to uniform placement; 1 = as many cells as uniform placement predicts.](preliminary/location.png){#fig-location}
+
+![Each stack in the image plane (µm): hull (grey), axis (dashed), cells coloured by tag (grey: untyped).](preliminary/location_maps.png){#fig-maps}
+
+- **No clear radial pattern.** Elongated cells sit as uniform placement predicts. Round cells lean slightly towards
+  the axis: their median is 0.41 against 0.49, and they are scarce in the outermost fifth.
+- **Within-stack comparison.** The difference is small and within what tag shuffling inside stacks produces.
+- **Small numbers.** With 47 round cells, a modest preference for the interior can be neither shown nor excluded.
+- **Positions are 2D, and the "axis" is a geometric proxy.** The 3D anatomy is unknown: whether the axis follows a
+  cortex, a trabecula or the bone surface is not established.
+
 ## Connected cells
 
 How many cells are in contact with others, through their processes or bodies? This is measured directly on the label volumes:
@@ -229,6 +261,7 @@ spheres near-contacts. Drag to rotate and scroll to zoom. The meshes are simplif
   within it, not two clusters. The manual tags capture a real gradient: they are recovered with AUC ≈ 0.85, well
   above chance and short of perfect.
 - **Nucleus volume and solidity do not differ.**
+- **No clear radial pattern.** Round cells lean slightly towards the axis of the section, but not beyond chance at this sample size.
 - **Most cells are connected to neighbours.** About 80% of kept cells are linked to at least one other, almost always
   process to process. Groups contain up to 23 cells, so the segmented cells form networks rather than isolated units.
 
