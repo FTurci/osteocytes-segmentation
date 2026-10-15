@@ -160,6 +160,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Aggregate analysis</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preliminary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preliminary analysis: round and elongated osteocytes</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -742,6 +748,12 @@ document.addEventListener("click", e => {
   const dialog = document.getElementById("cell-dialog");
   dialog.querySelector(".cell-viewer").src = card.dataset.glb;
   dialog.querySelector(".cell-title").textContent = card.dataset.title;
+  const validation = dialog.querySelector(".cell-validation");
+  validation.hidden = !card.dataset.validation;
+  if (card.dataset.validation) {
+    validation.querySelector("img").src = card.dataset.validation + ".gif";
+    validation.querySelector(".validation-png").href = card.dataset.validation + ".png";
+  }
   dialog.showModal();
 });
 
@@ -843,7 +855,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/FTurci\.github\.io\/osteocytes-segmentation\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

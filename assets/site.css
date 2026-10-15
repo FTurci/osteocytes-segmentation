@@ -5,10 +5,17 @@
 .cell-card .no-image { aspect-ratio: 1; display: grid; place-items: center; color: #888; }
 .cell-card figcaption { color: #ddd; font-size: 0.8rem; padding: 4px 8px; background: #222; }
 .cell-card:hover { outline: 2px solid var(--bs-primary); }
-#cell-dialog { width: min(800px, 95vw); border: none; border-radius: 8px; padding: 12px; background: #15171a; color: #eee; }
+#cell-dialog { width: min(1200px, 96vw); border: none; border-radius: 8px; padding: 12px; background: #15171a; color: #eee; }
 #cell-dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
 #cell-dialog .close { float: right; background: none; border: none; color: #eee; font-size: 1.6rem; line-height: 1; }
+.cell-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; align-items: start; }
 .cell-viewer { width: 100%; height: 520px; }
+.cell-validation { margin: 0; }
+.cell-validation[hidden] { display: none; }
+.cell-validation img { width: 100%; max-height: 520px; object-fit: contain; background: #fff; border-radius: 4px; image-rendering: pixelated; }
+.cell-validation figcaption { font-size: 0.8rem; color: #c3c2b7; margin-top: 6px; line-height: 1.8; }
+.cell-validation .key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--c); margin: 0 4px 0 8px; }
+.cell-validation a { color: #86b6ef; }
 table.datatable { font-size: 0.85rem; }
 .nuclei-toggle { margin-bottom: 6px; }
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 1rem 0; }
@@ -19,3 +26,5 @@ table.datatable { font-size: 0.85rem; }
 .pair-grid { display: grid; align-items: end; }
 .pair-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 6px 0 10px; color: #52514e; font-size: 0.9rem; }
 .pair-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+
+.group-viewer select { margin-bottom: 0.5rem; max-width: 100%; }
