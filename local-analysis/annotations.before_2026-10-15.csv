@@ -1,0 +1,197 @@
+series,label,tag,note,annotator,time
+sample 1.1,2,blob/outlier,,FT,2026-10-14T18:07:40
+sample 1.1,14,elongated,,FT,2026-10-14T18:07:42
+sample 1.1,19,blob/outlier,,FT,2026-10-14T18:07:46
+sample 1.1,29,round,,FT,2026-10-14T18:09:54
+sample 1.1,30,elongated,,FT,2026-10-14T18:04:05
+sample 1.1,34,round,,FT,2026-10-14T18:04:03
+sample 1.1,35,blob/outlier,,FT,2026-10-14T18:05:32
+sample 1.1,38,blob/outlier,,FT,2026-10-14T18:04:39
+sample 1.1,39,round,,FT,2026-10-14T18:03:23
+sample 1.1,46,blob/outlier,,FT,2026-10-14T18:06:07
+sample 1.1,48,blob/outlier,,FT,2026-10-14T18:04:30
+sample 1.1,52,blob/outlier,,FT,2026-10-14T18:05:18
+sample 1.1,56,elongated,,FT,2026-10-14T18:09:53
+sample 1.1,71,blob/outlier,,FT,2026-10-14T18:05:16
+sample 1.1,74,blob/outlier,,FT,2026-10-14T18:09:38
+sample 1.1,77,round,,FT,2026-10-14T18:10:21
+sample 1.1,78,elongated,,FT,2026-10-14T18:04:15
+sample 1.1,79,blob/outlier,,FT,2026-10-14T18:04:58
+sample 1.1,91,blob/outlier,,FT,2026-10-14T18:06:53
+sample 1.1,94,blob/outlier,,FT,2026-10-14T18:10:00
+sample 1.1,95,blob/outlier,,FT,2026-10-14T18:04:59
+sample 1.1,96,round,,FT,2026-10-14T18:07:10
+sample 1.1,98,blob/outlier,,FT,2026-10-14T18:07:38
+sample 1.1,103,elongated,,FT,2026-10-14T18:09:45
+sample 1.1,106,blob/outlier,,FT,2026-10-14T18:05:43
+sample 1.1,117,blob/outlier,,FT,2026-10-14T18:09:55
+sample 1.1,118,blob/outlier,,FT,2026-10-14T18:05:55
+sample 1.1,121,blob/outlier,,FT,2026-10-14T18:07:15
+sample 1.1,122,elongated,,FT,2026-10-14T18:09:58
+sample 1.1,127,round,,FT,2026-10-14T18:07:03
+sample 1.1,147,blob/outlier,,FT,2026-10-14T18:09:48
+sample 1.1,154,blob/outlier,,FT,2026-10-14T18:05:52
+sample 1.1,166,elongated,,FT,2026-10-14T18:04:28
+sample 1.1,169,blob/outlier,,FT,2026-10-14T18:09:44
+sample 1.1,172,blob/outlier,,FT,2026-10-14T18:07:55
+sample 1.1,173,unsure,,FT,2026-10-14T18:03:59
+sample 1.1,202,blob/outlier,,FT,2026-10-14T18:09:43
+sample 1.1,203,blob/outlier,,FT,2026-10-14T18:05:59
+sample 1.1,211,blob/outlier,,FT,2026-10-14T18:10:54
+sample 1.1,229,blob/outlier,,FT,2026-10-14T18:05:47
+sample 1.1,252,blob/outlier,,FT,2026-10-14T18:07:06
+sample 1.3,6,blob/outlier,,FT,2026-10-14T18:03:35
+sample 1.3,33,round,,FT,2026-10-14T18:03:40
+sample 1.3,35,blob/outlier,,FT,2026-10-14T18:03:51
+sample 1.3,39,elongated,,FT,2026-10-14T18:10:57
+sample 1.3,52,round,,FT,2026-10-14T18:07:28
+sample 1.3,60,blob/outlier,,FT,2026-10-14T18:06:41
+sample 1.3,64,blob/outlier,,FT,2026-10-14T18:06:59
+sample 1.3,66,blob/outlier,,FT,2026-10-14T18:04:17
+sample 1.3,70,blob/outlier,,FT,2026-10-14T18:05:10
+sample 1.3,73,elongated,,FT,2026-10-14T18:06:06
+sample 1.3,78,round,,FT,2026-10-14T18:10:01
+sample 1.3,81,blob/outlier,,FT,2026-10-14T18:07:47
+sample 1.3,96,blob/outlier,,FT,2026-10-14T18:04:48
+sample 1.3,97,round,,FT,2026-10-14T18:05:49
+sample 1.3,119,blob/outlier,,FT,2026-10-14T18:09:59
+sample 1.3,120,blob/outlier,,FT,2026-10-14T18:05:50
+sample 1.4,9,blob/outlier,,FT,2026-10-14T18:03:25
+sample 1.4,24,blob/outlier,,FT,2026-10-14T18:06:24
+sample 1.4,27,round,,FT,2026-10-14T18:06:17
+sample 1.4,36,round,,FT,2026-10-14T18:10:21
+sample 1.4,37,round,,FT,2026-10-14T18:07:17
+sample 1.4,38,blob/outlier,,FT,2026-10-14T18:06:03
+sample 1.4,43,round,,FT,2026-10-14T18:03:08
+sample 1.4,44,round,,FT,2026-10-14T18:04:37
+sample 1.4,47,elongated,,FT,2026-10-14T18:06:36
+sample 1.4,52,elongated,,FT,2026-10-14T18:06:22
+sample 1.4,55,round,,FT,2026-10-14T18:10:04
+sample 1.4,57,blob/outlier,,FT,2026-10-14T18:07:39
+sample 1.4,60,elongated,,FT,2026-10-14T18:10:22
+sample 1.4,62,elongated,,FT,2026-10-14T18:09:50
+sample 1.4,65,elongated,,FT,2026-10-14T18:05:42
+sample 1.4,71,elongated,,FT,2026-10-14T18:05:21
+sample 1.4,76,blob/outlier,,FT,2026-10-14T18:07:18
+sample 1.4,82,round,,FT,2026-10-14T18:06:51
+sample 1.4,84,blob/outlier,,FT,2026-10-14T18:07:45
+sample 1.4,91,blob/outlier,,FT,2026-10-14T18:06:19
+sample 1.4,95,round,,FT,2026-10-14T18:06:32
+sample 1.4,99,elongated,,FT,2026-10-14T18:06:15
+sample 1.4,108,round,,FT,2026-10-14T18:10:27
+sample 1.4,122,blob/outlier,,FT,2026-10-14T18:10:16
+sample 1.4,123,round,,FT,2026-10-14T18:10:41
+sample 1.4,125,elongated,,FT,2026-10-14T18:05:52
+sample 1.4,128,blob/outlier,,FT,2026-10-14T18:05:57
+sample 1.4,131,blob/outlier,,FT,2026-10-14T18:10:48
+sample 1.4,134,blob/outlier,,FT,2026-10-14T18:09:59
+sample 1.4,136,blob/outlier,,FT,2026-10-14T18:06:01
+sample 1.4,144,blob/outlier,,FT,2026-10-14T18:06:10
+sample 1.4,157,round,,FT,2026-10-14T18:07:16
+sample 1.4,160,elongated,,FT,2026-10-14T18:05:02
+sample 1.4,163,round,,FT,2026-10-14T18:10:35
+sample 1.4,170,round,,FT,2026-10-14T18:10:44
+sample 1.4,173,elongated,,FT,2026-10-14T18:09:41
+sample 1.4,184,blob/outlier,,FT,2026-10-14T18:06:51
+sample 1.4,218,elongated,,FT,2026-10-14T18:09:51
+sample 1.4,234,elongated,,FT,2026-10-14T18:09:36
+sample 1.4,244,blob/outlier,,FT,2026-10-14T18:05:03
+sample 2.1_ultrasonic cleaned,18,round,,FT,2026-10-14T18:09:57
+sample 2.1_ultrasonic cleaned,21,elongated,,FT,2026-10-14T18:06:46
+sample 2.1_ultrasonic cleaned,23,blob/outlier,,FT,2026-10-14T18:06:31
+sample 2.1_ultrasonic cleaned,26,elongated,,FT,2026-10-14T18:09:49
+sample 2.1_ultrasonic cleaned,37,elongated,,FT,2026-10-14T18:04:10
+sample 2.1_ultrasonic cleaned,38,elongated,,FT,2026-10-14T18:07:29
+sample 2.1_ultrasonic cleaned,39,elongated,,FT,2026-10-14T18:10:09
+sample 2.1_ultrasonic cleaned,47,blob/outlier,,FT,2026-10-14T18:05:23
+sample 2.1_ultrasonic cleaned,55,round,,FT,2026-10-14T18:04:02
+sample 2.1_ultrasonic cleaned,61,elongated,,FT,2026-10-14T18:07:13
+sample 2.1_ultrasonic cleaned,74,blob/outlier,,FT,2026-10-14T18:04:36
+sample 2.1_ultrasonic cleaned,77,elongated,,FT,2026-10-14T18:10:03
+sample 2.1_ultrasonic cleaned,82,elongated,,FT,2026-10-14T18:03:49
+sample 2.1_ultrasonic cleaned,87,round,,FT,2026-10-14T18:10:24
+sample 2.1_ultrasonic cleaned,117,round,,FT,2026-10-14T18:10:30
+sample 2.1_ultrasonic cleaned,124,elongated,,FT,2026-10-14T18:06:16
+sample 2.1_ultrasonic cleaned,134,elongated,,FT,2026-10-14T18:10:26
+sample 2.1_ultrasonic cleaned,140,elongated,,FT,2026-10-14T18:10:18
+sample 2.1_ultrasonic cleaned,146,blob/outlier,,FT,2026-10-14T18:07:05
+sample 2.1_ultrasonic cleaned,150,elongated,,FT,2026-10-14T18:05:27
+sample 2.1_ultrasonic cleaned,160,elongated,,FT,2026-10-14T18:04:14
+sample 3.1,1,elongated,,FT,2026-10-14T18:03:31
+sample 3.1,2,round,,FT,2026-10-14T18:05:45
+sample 3.1,3,blob/outlier,,FT,2026-10-14T18:06:55
+sample 3.1,4,blob/outlier,,FT,2026-10-14T18:06:37
+sample 3.1,5,elongated,,FT,2026-10-14T18:07:25
+sample 3.1,6,round,,FT,2026-10-14T18:10:52
+sample 3.1,7,elongated,,FT,2026-10-14T18:06:09
+sample 3.1,8,elongated,,FT,2026-10-14T18:07:33
+sample 3.1,10,elongated,,FT,2026-10-14T18:06:43
+sample 3.1,12,elongated,,FT,2026-10-14T18:06:52
+sample 3.1,13,elongated,,FT,2026-10-14T18:10:14
+sample 3.1,14,blob/outlier,,FT,2026-10-14T18:05:36
+sample 3.1,16,elongated,,FT,2026-10-14T18:10:49
+sample 3.1,17,blob/outlier,,FT,2026-10-14T18:07:27
+sample 3.1,19,elongated,,FT,2026-10-14T18:07:44
+sample 3.1,22,blob/outlier,,FT,2026-10-14T18:07:14
+sample 3.1,26,blob/outlier,,FT,2026-10-14T18:10:36
+sample 3.1,27,elongated,,FT,2026-10-14T18:07:15
+sample 3.1,35,blob/outlier,,FT,2026-10-14T18:05:35
+sample 3.1,41,blob/outlier,,FT,2026-10-14T18:07:24
+sample 3.1,43,elongated,,FT,2026-10-14T18:03:03
+sample 3.1,46,blob/outlier,,FT,2026-10-14T18:11:00
+sample 3.1,48,blob/outlier,,FT,2026-10-14T18:07:48
+sample 3.2,9,elongated,,FT,2026-10-14T18:04:34
+sample 3.2,13,elongated,,FT,2026-10-14T18:03:28
+sample 3.2,15,elongated,,FT,2026-10-14T18:06:57
+sample 3.2,19,blob/outlier,,FT,2026-10-14T18:07:26
+sample 3.2,23,elongated,,FT,2026-10-14T18:10:02
+sample 3.2,27,elongated,,FT,2026-10-14T18:07:19
+sample 3.2,29,elongated,,FT,2026-10-14T18:05:20
+sample 3.2,30,blob/outlier,,FT,2026-10-14T18:06:47
+sample 3.2,35,blob/outlier,,FT,2026-10-14T18:10:11
+sample 3.2,36,blob/outlier,,FT,2026-10-14T18:07:06
+sample 3.2,47,elongated,,FT,2026-10-14T18:10:50
+sample 3.2,49,blob/outlier,,FT,2026-10-14T18:07:31
+sample 3.2,54,blob/outlier,,FT,2026-10-14T18:05:06
+sample 3.2,57,blob/outlier,,FT,2026-10-14T18:05:48
+sample 3.2,60,elongated,,FT,2026-10-14T18:09:45
+sample 3.2,61,blob/outlier,,FT,2026-10-14T18:06:10
+sample 3.2,63,elongated,,FT,2026-10-14T18:03:46
+sample 3.2,64,blob/outlier,,FT,2026-10-14T18:05:37
+sample 3.2,71,blob/outlier,,FT,2026-10-14T18:06:34
+sample 3.2,76,blob/outlier,,FT,2026-10-14T18:10:12
+sample 3.2,87,blob/outlier,,FT,2026-10-14T18:06:02
+sample 3.2,88,blob/outlier,,FT,2026-10-14T18:10:47
+sample 3.2,94,elongated,,FT,2026-10-14T18:04:26
+sample 3.2,101,elongated,,FT,2026-10-14T18:04:33
+sample 3.2,106,blob/outlier,,FT,2026-10-14T18:06:02
+sample 3.2,115,blob/outlier,,FT,2026-10-14T18:03:44
+sample 3.2,119,blob/outlier,,FT,2026-10-14T18:06:49
+sample 4.1,6,round,,FT,2026-10-14T18:10:10
+sample 4.1,10,elongated,,FT,2026-10-14T18:10:15
+sample 4.1,11,blob/outlier,,FT,2026-10-14T18:07:32
+sample 4.1,12,round,,FT,2026-10-14T18:10:08
+sample 4.1,13,blob/outlier,,FT,2026-10-14T18:06:29
+sample 4.1,17,blob/outlier,,FT,2026-10-14T18:10:55
+sample 4.1,20,blob/outlier,,FT,2026-10-14T18:06:21
+sample 4.1,22,blob/outlier,,FT,2026-10-14T18:09:42
+sample 4.1,26,elongated,,FT,2026-10-14T18:06:23
+sample 4.1,28,round,,FT,2026-10-14T18:07:08
+sample 4.1,29,blob/outlier,,FT,2026-10-14T18:06:12
+sample 4.1,30,elongated,,FT,2026-10-14T18:09:47
+sample 4.1,32,round,,FT,2026-10-14T18:07:11
+smple 1.2,3,blob/outlier,,FT,2026-10-14T18:06:12
+smple 1.2,24,blob/outlier,,FT,2026-10-14T18:06:32
+smple 1.2,28,blob/outlier,,FT,2026-10-14T18:06:50
+smple 1.2,43,elongated,,FT,2026-10-14T18:06:28
+smple 1.2,46,round,,FT,2026-10-14T18:06:44
+smple 1.2,47,round,,FT,2026-10-14T18:11:01
+smple 1.2,48,blob/outlier,,FT,2026-10-14T18:05:59
+smple 1.2,51,elongated,,FT,2026-10-14T18:06:40
+smple 1.2,52,blob/outlier,,FT,2026-10-14T18:07:35
+smple 1.2,54,unsure,,FT,2026-10-14T18:03:19
+smple 1.2,58,round,,FT,2026-10-14T18:10:32
+smple 1.2,62,elongated,,FT,2026-10-14T18:03:00
+smple 1.2,68,elongated,,FT,2026-10-14T18:03:09
+smple 1.2,83,round,,FT,2026-10-14T18:10:31
+smple 1.2,84,round,,FT,2026-10-14T18:06:55

@@ -22,7 +22,7 @@ either inside a ch1 region the filters rejected or without ch1 signal (dye did n
 | `axis_1/2/3_um` | full axes of the solid ellipsoid with the region's second moments, $2\sqrt{5\lambda_k}$, longest first |
 | `flatness` | $\sqrt{\lambda_3/\lambda_2}$: ~0 for a sheet, ~1 for a sphere or rod |
 | `n_nuclei`, `nucleus_volume_um3` | nuclei with most of their volume inside the region; nucleus voxels inside it |
-| `n_dendrites` | protrusions beyond the cell body (opening by a ball of 2 voxels) reaching ≥ 2 µm |
+| `n_dendrites` | protrusions beyond the cell body (opening by a ball of 2 voxels) reaching ≥ 2 µm and thin in two directions; broad flat ones (linearity √(λ₂/λ₁) ≥ 0.65, planarity √(λ₃/λ₂) ≤ 0.25) are parts of the flattened body and not counted (exports from 14 Oct 2026 on) |
 | `reach_um` | farthest distance of a dendrite from the body surface; the robust length measure |
 | `path_um` | skeleton length of a dendrite beyond the body, branches summed, spurs < 1.5 µm pruned; unreliable for short, thick processes |
 

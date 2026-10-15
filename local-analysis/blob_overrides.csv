@@ -1,0 +1,6 @@
+series,label,decision,reason
+sample 1.1,34,keep,round body with two long processes
+sample 1.1,71,keep,smooth spindle without processes: ambiguous; review
+sample 1.1,96,exclude,compact irregular body; few processes lift it above the rule
+sample 2.1_ultrasonic cleaned,47,keep,oval body with short processes; review
+smple 1.2,52,keep,body with processes

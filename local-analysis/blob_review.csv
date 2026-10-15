@@ -1,0 +1,99 @@
+series,label,tag,note,annotator,time
+sample 1.1,2,junk,,FT,2026-10-15T09:47:35
+sample 1.1,3,real but dirty,,FT,2026-10-15T14:29:51
+sample 1.1,5,junk,,FT,2026-10-15T14:30:06
+sample 1.1,19,real (clean),,FT,2026-10-15T09:44:43
+sample 1.1,23,junk,,FT,2026-10-15T14:29:56
+sample 1.1,24,junk,,FT,2026-10-15T14:30:13
+sample 1.1,32,junk,,FT,2026-10-15T14:30:17
+sample 1.1,34,real but dirty,,FT,2026-10-15T09:46:13
+sample 1.1,36,real but dirty,,FT,2026-10-15T09:47:27
+sample 1.1,45,junk,,FT,2026-10-15T09:44:52
+sample 1.1,46,real but dirty,,FT,2026-10-15T09:47:11
+sample 1.1,59,real but dirty,,FT,2026-10-15T09:47:09
+sample 1.1,62,junk,,FT,2026-10-15T14:29:57
+sample 1.1,64,real but dirty,,FT,2026-10-15T09:48:12
+sample 1.1,71,real but dirty,,FT,2026-10-15T09:47:56
+sample 1.1,82,junk,,FT,2026-10-15T09:45:20
+sample 1.1,88,real (clean),,FT,2026-10-15T09:47:45
+sample 1.1,96,real but dirty,,FT,2026-10-15T09:45:29
+sample 1.1,105,real but dirty,,FT,2026-10-15T09:46:00
+sample 1.1,106,real but dirty,,FT,2026-10-15T09:45:35
+sample 1.1,110,real but dirty,,FT,2026-10-15T09:47:25
+sample 1.1,119,real (clean),,FT,2026-10-15T14:30:22
+sample 1.1,130,real (clean),,FT,2026-10-15T14:30:27
+sample 1.1,142,junk,,FT,2026-10-15T09:49:07
+sample 1.1,146,real but dirty,,FT,2026-10-15T14:30:19
+sample 1.1,150,real (clean),,FT,2026-10-15T14:30:24
+sample 1.1,154,junk,,FT,2026-10-15T09:45:47
+sample 1.1,156,real (clean),,FT,2026-10-15T09:49:10
+sample 1.1,182,junk,,FT,2026-10-15T09:47:40
+sample 1.1,190,real but dirty,,FT,2026-10-15T09:47:57
+sample 1.1,206,junk,,FT,2026-10-15T09:45:44
+sample 1.1,227,junk,,FT,2026-10-15T14:30:25
+sample 1.1,228,real but dirty,,FT,2026-10-15T09:47:15
+sample 1.1,229,junk,,FT,2026-10-15T14:30:04
+sample 1.1,230,junk,,FT,2026-10-15T09:47:37
+sample 1.1,231,real but dirty,,FT,2026-10-15T09:47:47
+sample 1.3,6,junk,,FT,2026-10-15T14:30:01
+sample 1.3,20,real (clean),,FT,2026-10-15T14:30:09
+sample 1.3,29,real but dirty,,FT,2026-10-15T09:45:31
+sample 1.3,39,junk,,FT,2026-10-15T09:48:15
+sample 1.3,50,real but dirty,,FT,2026-10-15T09:46:11
+sample 1.3,55,real but dirty,,FT,2026-10-15T09:48:00
+sample 1.3,66,junk,,FT,2026-10-15T09:48:19
+sample 1.3,83,real but dirty,,FT,2026-10-15T09:45:37
+sample 1.4,9,junk,,FT,2026-10-15T09:45:59
+sample 1.4,24,real but dirty,,FT,2026-10-15T09:48:25
+sample 1.4,38,real but dirty,,FT,2026-10-15T09:48:39
+sample 1.4,57,real but dirty,,FT,2026-10-15T09:46:45
+sample 1.4,76,real but dirty,,FT,2026-10-15T09:48:50
+sample 1.4,84,real (clean),,FT,2026-10-15T09:46:16
+sample 1.4,91,real (clean),,FT,2026-10-15T09:47:49
+sample 1.4,122,unsure,,FT,2026-10-15T09:48:46
+sample 1.4,128,real (clean),,FT,2026-10-15T09:47:30
+sample 1.4,131,real but dirty,,FT,2026-10-15T09:46:05
+sample 1.4,134,junk,,FT,2026-10-15T09:46:14
+sample 1.4,136,real (clean),,FT,2026-10-15T09:45:00
+sample 1.4,144,junk,,FT,2026-10-15T09:45:38
+sample 1.4,184,real but dirty,,FT,2026-10-15T09:48:05
+sample 1.4,244,real but dirty,,FT,2026-10-15T09:46:54
+sample 2.1_ultrasonic cleaned,23,real but dirty,,FT,2026-10-15T09:46:52
+sample 2.1_ultrasonic cleaned,47,real but dirty,,FT,2026-10-15T09:47:58
+sample 2.1_ultrasonic cleaned,74,real but dirty,,FT,2026-10-15T09:48:26
+sample 2.1_ultrasonic cleaned,146,junk,,FT,2026-10-15T09:48:24
+sample 3.1,3,real but dirty,,FT,2026-10-15T09:48:11
+sample 3.1,4,junk,,FT,2026-10-15T09:47:12
+sample 3.1,14,real but dirty,,FT,2026-10-15T09:47:19
+sample 3.1,17,real (clean),,FT,2026-10-15T09:46:43
+sample 3.1,22,junk,,FT,2026-10-15T09:49:06
+sample 3.1,26,real but dirty,,FT,2026-10-15T09:45:12
+sample 3.1,35,real (clean),,FT,2026-10-15T09:47:06
+sample 3.1,41,real (clean),,FT,2026-10-15T14:30:29
+sample 3.1,46,real but dirty,,FT,2026-10-15T09:48:59
+sample 3.1,48,junk,,FT,2026-10-15T09:46:30
+sample 3.2,19,junk,,FT,2026-10-15T09:48:36
+sample 3.2,30,real (clean),,FT,2026-10-15T09:47:01
+sample 3.2,35,real (clean),,FT,2026-10-15T09:49:12
+sample 3.2,36,real but dirty,,FT,2026-10-15T09:48:02
+sample 3.2,49,real (clean),,FT,2026-10-15T09:45:17
+sample 3.2,54,real (clean),,FT,2026-10-15T09:47:43
+sample 3.2,57,real but dirty,,FT,2026-10-15T09:45:36
+sample 3.2,61,real (clean),,FT,2026-10-15T09:46:23
+sample 3.2,64,real but dirty,,FT,2026-10-15T09:49:01
+sample 3.2,71,junk,,FT,2026-10-15T09:46:37
+sample 3.2,76,junk,,FT,2026-10-15T09:45:50
+sample 3.2,87,junk,,FT,2026-10-15T09:48:20
+sample 3.2,88,real but dirty,,FT,2026-10-15T09:47:22
+sample 3.2,106,real (clean),,FT,2026-10-15T09:45:26
+sample 3.2,115,real but dirty,,FT,2026-10-15T09:48:48
+sample 3.2,119,real but dirty,,FT,2026-10-15T09:46:02
+sample 4.1,10,real but dirty,,FT,2026-10-15T09:48:07
+sample 4.1,12,junk,,FT,2026-10-15T14:29:58
+sample 4.1,16,junk,,FT,2026-10-15T09:46:48
+smple 1.2,3,real but dirty,,FT,2026-10-15T09:45:32
+smple 1.2,24,real but dirty,,FT,2026-10-15T09:48:30
+smple 1.2,28,real but dirty,,FT,2026-10-15T09:46:50
+smple 1.2,48,real (clean),,FT,2026-10-15T14:30:37
+smple 1.2,52,real (clean),,FT,2026-10-15T09:49:18
+smple 1.2,54,real (clean),,FT,2026-10-15T09:48:28

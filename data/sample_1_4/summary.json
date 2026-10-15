@@ -1,7 +1,7 @@
 {
  "series": "sample 1.4",
- "file": "Texas red 20min_24.8.2026.lif",
- "written": "2026-10-07T14:29:03",
+ "file": "/Users/ft14968/Projects/osteo-track/lif-files/New_data_sept2026/Texas red 20min_24.8.2026.lif",
+ "written": "2026-10-14T17:34:25",
  "voxel_size_um": 0.4814710371819961,
  "shape_zyx": [
   94,
@@ -23,9 +23,12 @@
   "soft tissue": 13,
   "labelled, rejected": 13,
   "no ch1 label": 15,
-  "inside hull, not labelled as osteocyte (rejected + no ch1)": 28
+  "inside hull, not labelled as osteocyte (rejected + no ch1)": 28,
+  "protrusions reaching >= 2.0 \u00b5m": 336,
+  "dendrites (rods, counted)": 334,
+  "flat parts of the body (sheets, not counted)": 2
  },
- "n_dendrites": 336,
+ "n_dendrites": 334,
  "parameters": {
   "SERIES": "sample 1.4",
   "CH0_MIN_OBJECT_SIZE": 100,
@@ -50,9 +53,12 @@
   "DENDRITE_BODY_RADIUS": 2,
   "DENDRITE_COUNT_REACH_UM": 2.0,
   "DENDRITE_SPUR_UM": 1.5,
+  "DENDRITE_SHEET_MIN_LINEARITY": 0.65,
+  "DENDRITE_SHEET_MAX_PLANARITY": 0.25,
   "NUCLEUS_OPACITY": 0.35,
   "SAVE_TIFS": false,
   "SAVE_MESHES": false,
+  "SAVE_VALIDATION": true,
   "SAVE_RENDERINGS": true,
   "RENDER_PAD": 5,
   "RENDER_FRAMES": 36,

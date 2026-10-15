@@ -2,9 +2,11 @@ project:
   type: website
   resources:
     - "data/**"
+    - "preliminary/groups/**"
   render:
     - index.qmd
     - analysis.qmd
+    - preliminary.qmd
     - "series/*.qmd"
 
 website:
@@ -14,6 +16,7 @@ website:
     contents:
       - index.qmd
       - analysis.qmd
+      - preliminary.qmd
       - section: "Series"
         contents: "series/*.qmd"
 

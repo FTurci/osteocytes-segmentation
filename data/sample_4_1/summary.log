@@ -1,60 +1,68 @@
 series        sample 4.1
 file          Texas red 20min_24.8.2026.lif
-written       2026-10-07T16:16:27
+written       2026-10-15T14:14:31
 voxel size    0.44710 µm (cubic; raw z step 0.30279 µm)
 volume        (74, 512, 512) voxels (z, y, x) = 33.1 x 228.9 x 228.9 µm
 
 == counts
-watershed regions                                                              29
-  >= 100 voxels and > 0 vox inside xy hull (pass 1)                            20
-  > -6 vox inside hull without soft tissue (pass 2)                            20
-  removed: far side of soft tissue                                              2
-  removed: no nucleus                                                           5
+watershed regions                                                              52
+  >= 100 voxels and > 0 vox inside xy hull (pass 1)                            24
+  > 0 vox inside hull without soft tissue (pass 2)                             16
+  removed: far side of soft tissue                                              1
+  removed: no nucleus                                                           6
   split by nuclei                                                               0
   removed: flat                                                                 0
-surviving osteocytes                                                           13
-nuclei (cleaned ch0)                                                           30
-  inside hull, bone side                                                       23
-    detected                                                                   12
-    soft tissue                                                                 4
+surviving osteocytes                                                            9
+nuclei (cleaned ch0)                                                           22
+  inside hull, bone side                                                       15
+    detected                                                                    9
+    soft tissue                                                                 2
     labelled, rejected                                                          2
-    no ch1 label                                                                5
-  inside hull, not labelled as osteocyte (rejected + no ch1)                    7
+    no ch1 label                                                                2
+  inside hull, not labelled as osteocyte (rejected + no ch1)                    4
+protrusions reaching >= 2.0 µm                                                 48
+  dendrites (rods, counted)                                                    46
+  flat parts of the body (sheets, not counted)                                  2
 
 == surviving osteocytes
-volume              mean 728.7  sd 348.8 µm³
-dendrites per cell  mean 4.85  sd 4.18  (total 63; counted if reach >= 2.0 µm)
-dendrite reach      mean 5.66  sd 4.20 µm
-dendrite path       mean 10.63  sd 17.42 µm
+volume              mean 566.9  sd 191.4 µm³
+dendrites per cell  mean 5.11  sd 3.06  (total 46; counted if reach >= 2.0 µm)
+dendrite reach      mean 5.27  sd 3.90 µm
+dendrite path       mean 8.29  sd 10.38 µm
 
 == parameters
 {
  "SERIES": "sample 4.1",
  "CH0_MIN_OBJECT_SIZE": 100,
- "CH0_CLOSING_RADIUS": 3,
- "CH0_EROSION_RADIUS": 0.0,
+ "CH0_CLOSING_RADIUS": 1,
+ "CH0_EROSION_RADIUS": 1.0,
  "CH0_MAX_NUCLEUS_SIZE": 3000,
- "CH1_EROSION_RADIUS": 2,
- "CH1_ERODED_THRESHOLD": 0.73,
+ "CH1_EROSION_RADIUS": 3,
+ "CH1_ERODED_THRESHOLD": 0.42,
  "CH1_MAX_OSTEOCYTE_SIZE": 30000,
- "CH1_FOREGROUND_THRESHOLD": 0.42,
- "SOFT_TISSUE_MARGIN": 0,
+ "CH1_FOREGROUND_THRESHOLD": 0.58,
+ "SOFT_TISSUE_MARGIN": 1,
  "HULL_MIN_AREA": 100,
  "HULL_MIN_DISTANCE_PASS_1": 0,
- "HULL_MIN_DISTANCE_PASS_2": -6,
+ "HULL_MIN_DISTANCE_PASS_2": 0,
  "MAX_SOFT_TISSUE_CROSSING": 25,
  "NUCLEUS_MIN_VOXELS": 200,
- "NUCLEUS_SPLIT_VOXELS": 2000,
+ "NUCLEUS_SPLIT_VOXELS": 800,
  "BODY_SMOOTH_SIGMA": 1.5,
  "PEAK_H": 1.5,
  "ORPHAN_MIN_RADIUS": 3.5,
- "MIN_FLATNESS": 0.0,
+ "MIN_FLATNESS": 0.19,
  "DENDRITE_BODY_RADIUS": 2,
  "DENDRITE_COUNT_REACH_UM": 2.0,
  "DENDRITE_SPUR_UM": 1.5,
+ "DENDRITE_SHEET_MIN_LINEARITY": 0.65,
+ "DENDRITE_SHEET_MAX_PLANARITY": 0.25,
  "NUCLEUS_OPACITY": 0.35,
  "SAVE_TIFS": false,
  "SAVE_MESHES": true,
+ "SAVE_CROPS": true,
+ "CROP_PAD": 8,
+ "SAVE_VALIDATION": true,
  "SAVE_RENDERINGS": true,
  "RENDER_PAD": 5,
  "RENDER_FRAMES": 36,

@@ -9,6 +9,12 @@ document.addEventListener("click", e => {
   const dialog = document.getElementById("cell-dialog");
   dialog.querySelector(".cell-viewer").src = card.dataset.glb;
   dialog.querySelector(".cell-title").textContent = card.dataset.title;
+  const validation = dialog.querySelector(".cell-validation");
+  validation.hidden = !card.dataset.validation;
+  if (card.dataset.validation) {
+    validation.querySelector("img").src = card.dataset.validation + ".gif";
+    validation.querySelector(".validation-png").href = card.dataset.validation + ".png";
+  }
   dialog.showModal();
 });
 

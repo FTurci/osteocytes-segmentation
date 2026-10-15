@@ -1,0 +1,204 @@
+series,label,tag,note,annotator,time
+sample 1.1,2,blob/outlier,,FT,2026-10-14T18:07:40
+sample 1.1,3,blob/outlier,,FT,2026-10-15T14:54:10
+sample 1.1,5,unsure,,FT,2026-10-15T14:26:41
+sample 1.1,15,elongated,,FT,2026-10-14T18:07:42
+sample 1.1,19,elongated,,FT,2026-10-15T14:54:16
+sample 1.1,23,blob/outlier,,FT,2026-10-15T14:26:09
+sample 1.1,24,blob/outlier,,FT,2026-10-15T14:26:15
+sample 1.1,26,elongated,,FT,2026-10-14T18:04:15
+sample 1.1,27,round,,FT,2026-10-14T18:09:54
+sample 1.1,29,elongated,,FT,2026-10-14T18:04:05
+sample 1.1,32,unsure,,FT,2026-10-15T14:25:59
+sample 1.1,33,round,,FT,2026-10-14T18:04:03
+sample 1.1,34,round,,FT,2026-10-15T14:54:18
+sample 1.1,36,elongated,,FT,2026-10-15T14:54:26
+sample 1.1,37,round,,FT,2026-10-14T18:03:23
+sample 1.1,45,blob/outlier,,FT,2026-10-14T18:06:07
+sample 1.1,46,elongated,,FT,2026-10-15T14:54:31
+sample 1.1,49,elongated,,FT,2026-10-14T18:09:53
+sample 1.1,59,elongated,,FT,2026-10-15T14:54:33
+sample 1.1,62,blob/outlier,,FT,2026-10-15T14:27:36
+sample 1.1,64,elongated,,FT,2026-10-15T14:54:34
+sample 1.1,69,round,,FT,2026-10-14T18:10:21
+sample 1.1,71,elongated,,FT,2026-10-15T14:54:36
+sample 1.1,82,blob/outlier,,FT,2026-10-14T18:06:53
+sample 1.1,84,elongated,,FT,2026-10-15T14:26:20
+sample 1.1,85,elongated,,FT,2026-10-15T14:27:34
+sample 1.1,86,round,,FT,2026-10-14T18:07:10
+sample 1.1,88,elongated,,FT,2026-10-15T14:54:38
+sample 1.1,96,blob/outlier,,FT,2026-10-15T14:54:42
+sample 1.1,105,round,,FT,2026-10-15T14:54:44
+sample 1.1,106,elongated,,FT,2026-10-15T14:54:46
+sample 1.1,110,elongated,,FT,2026-10-15T14:55:04
+sample 1.1,111,elongated,,FT,2026-10-14T18:09:58
+sample 1.1,116,round,,FT,2026-10-14T18:07:03
+sample 1.1,119,elongated,,FT,2026-10-15T14:55:05
+sample 1.1,130,unsure,,FT,2026-10-15T14:55:08
+sample 1.1,141,elongated,,FT,2026-10-15T14:27:30
+sample 1.1,142,blob/outlier,,FT,2026-10-14T18:05:52
+sample 1.1,146,blob/outlier,,FT,2026-10-15T14:55:15
+sample 1.1,150,unsure,,FT,2026-10-15T14:55:19
+sample 1.1,151,round,,FT,2026-10-15T14:26:35
+sample 1.1,154,blob/outlier,,FT,2026-10-14T18:09:44
+sample 1.1,156,round,,FT,2026-10-15T14:55:22
+sample 1.1,182,blob/outlier,,FT,2026-10-14T18:05:59
+sample 1.1,190,elongated,,FT,2026-10-15T14:27:42
+sample 1.1,206,blob/outlier,,FT,2026-10-14T18:05:47
+sample 1.1,227,blob/outlier,,FT,2026-10-15T14:26:30
+sample 1.1,228,round,,FT,2026-10-15T14:55:27
+sample 1.1,229,unsure,,FT,2026-10-15T14:26:01
+sample 1.1,230,blob/outlier,,FT,2026-10-14T18:05:18
+sample 1.1,231,unsure,,FT,2026-10-15T14:55:32
+sample 1.3,6,blob/outlier,,FT,2026-10-14T18:03:35
+sample 1.3,20,round,,FT,2026-10-15T14:55:39
+sample 1.3,27,round,,FT,2026-10-14T18:03:40
+sample 1.3,29,unsure,,FT,2026-10-15T14:55:45
+sample 1.3,34,elongated,,FT,2026-10-14T18:10:57
+sample 1.3,39,blob/outlier,,FT,2026-10-14T18:06:41
+sample 1.3,42,round,,FT,2026-10-14T18:07:28
+sample 1.3,46,round,,FT,2026-10-15T14:26:26
+sample 1.3,50,elongated,,FT,2026-10-15T14:55:55
+sample 1.3,55,elongated,,FT,2026-10-15T14:55:56
+sample 1.3,58,elongated,,FT,2026-10-14T18:06:06
+sample 1.3,63,round,,FT,2026-10-14T18:10:01
+sample 1.3,66,blob/outlier,,FT,2026-10-14T18:07:47
+sample 1.3,75,elongated,,FT,2026-10-15T14:26:12
+sample 1.3,80,round,,FT,2026-10-15T14:26:28
+sample 1.3,83,elongated,,FT,2026-10-15T14:55:58
+sample 1.3,84,round,,FT,2026-10-14T18:05:49
+sample 1.4,9,blob/outlier,,FT,2026-10-14T18:03:25
+sample 1.4,24,elongated,,FT,2026-10-15T14:56:00
+sample 1.4,27,round,,FT,2026-10-14T18:06:17
+sample 1.4,36,round,,FT,2026-10-14T18:10:21
+sample 1.4,37,round,,FT,2026-10-14T18:07:17
+sample 1.4,38,blob/outlier,,FT,2026-10-15T14:56:04
+sample 1.4,43,round,,FT,2026-10-14T18:03:08
+sample 1.4,44,round,,FT,2026-10-14T18:04:37
+sample 1.4,47,elongated,,FT,2026-10-14T18:06:36
+sample 1.4,52,elongated,,FT,2026-10-14T18:06:22
+sample 1.4,55,round,,FT,2026-10-14T18:10:04
+sample 1.4,57,blob/outlier,,FT,2026-10-15T14:56:06
+sample 1.4,60,elongated,,FT,2026-10-14T18:10:22
+sample 1.4,62,elongated,,FT,2026-10-14T18:09:50
+sample 1.4,65,elongated,,FT,2026-10-14T18:05:42
+sample 1.4,71,elongated,,FT,2026-10-14T18:05:21
+sample 1.4,76,unsure,,FT,2026-10-15T14:56:08
+sample 1.4,82,round,,FT,2026-10-14T18:06:51
+sample 1.4,84,elongated,,FT,2026-10-15T14:56:11
+sample 1.4,91,elongated,,FT,2026-10-15T14:56:13
+sample 1.4,95,round,,FT,2026-10-14T18:06:32
+sample 1.4,99,elongated,,FT,2026-10-14T18:06:15
+sample 1.4,108,round,,FT,2026-10-14T18:10:27
+sample 1.4,122,elongated,,FT,2026-10-15T14:56:15
+sample 1.4,123,round,,FT,2026-10-14T18:10:41
+sample 1.4,125,elongated,,FT,2026-10-14T18:05:52
+sample 1.4,128,blob/outlier,,FT,2026-10-15T14:56:19
+sample 1.4,131,blob/outlier,,FT,2026-10-15T14:56:21
+sample 1.4,134,blob/outlier,,FT,2026-10-14T18:09:59
+sample 1.4,136,elongated,,FT,2026-10-15T14:56:22
+sample 1.4,144,blob/outlier,,FT,2026-10-14T18:06:10
+sample 1.4,157,round,,FT,2026-10-14T18:07:16
+sample 1.4,160,elongated,,FT,2026-10-14T18:05:02
+sample 1.4,163,round,,FT,2026-10-14T18:10:35
+sample 1.4,170,round,,FT,2026-10-14T18:10:44
+sample 1.4,173,elongated,,FT,2026-10-14T18:09:41
+sample 1.4,184,elongated,,FT,2026-10-15T14:56:23
+sample 1.4,218,elongated,,FT,2026-10-14T18:09:51
+sample 1.4,234,elongated,,FT,2026-10-14T18:09:36
+sample 1.4,244,unsure,,FT,2026-10-15T14:56:27
+sample 2.1_ultrasonic cleaned,18,round,,FT,2026-10-14T18:09:57
+sample 2.1_ultrasonic cleaned,21,elongated,,FT,2026-10-14T18:06:46
+sample 2.1_ultrasonic cleaned,23,elongated,,FT,2026-10-15T14:56:29
+sample 2.1_ultrasonic cleaned,26,elongated,,FT,2026-10-14T18:09:49
+sample 2.1_ultrasonic cleaned,37,elongated,,FT,2026-10-14T18:04:10
+sample 2.1_ultrasonic cleaned,38,elongated,,FT,2026-10-14T18:07:29
+sample 2.1_ultrasonic cleaned,39,elongated,,FT,2026-10-14T18:10:09
+sample 2.1_ultrasonic cleaned,47,elongated,,FT,2026-10-15T14:56:32
+sample 2.1_ultrasonic cleaned,55,round,,FT,2026-10-14T18:04:02
+sample 2.1_ultrasonic cleaned,61,elongated,,FT,2026-10-14T18:07:13
+sample 2.1_ultrasonic cleaned,74,elongated,,FT,2026-10-15T14:56:34
+sample 2.1_ultrasonic cleaned,77,elongated,,FT,2026-10-14T18:10:03
+sample 2.1_ultrasonic cleaned,82,elongated,,FT,2026-10-14T18:03:49
+sample 2.1_ultrasonic cleaned,87,round,,FT,2026-10-14T18:10:24
+sample 2.1_ultrasonic cleaned,117,round,,FT,2026-10-14T18:10:30
+sample 2.1_ultrasonic cleaned,124,elongated,,FT,2026-10-14T18:06:16
+sample 2.1_ultrasonic cleaned,134,elongated,,FT,2026-10-14T18:10:26
+sample 2.1_ultrasonic cleaned,140,elongated,,FT,2026-10-14T18:10:18
+sample 2.1_ultrasonic cleaned,146,blob/outlier,,FT,2026-10-14T18:07:05
+sample 2.1_ultrasonic cleaned,150,elongated,,FT,2026-10-14T18:05:27
+sample 2.1_ultrasonic cleaned,160,elongated,,FT,2026-10-14T18:04:14
+sample 3.1,1,elongated,,FT,2026-10-14T18:03:31
+sample 3.1,2,round,,FT,2026-10-14T18:05:45
+sample 3.1,3,elongated,,FT,2026-10-15T14:56:37
+sample 3.1,4,blob/outlier,,FT,2026-10-14T18:06:37
+sample 3.1,5,elongated,,FT,2026-10-14T18:07:25
+sample 3.1,6,round,,FT,2026-10-14T18:10:52
+sample 3.1,7,elongated,,FT,2026-10-14T18:06:09
+sample 3.1,8,elongated,,FT,2026-10-14T18:07:33
+sample 3.1,10,elongated,,FT,2026-10-14T18:06:43
+sample 3.1,12,elongated,,FT,2026-10-14T18:06:52
+sample 3.1,13,elongated,,FT,2026-10-15T14:27:42
+sample 3.1,14,elongated,,FT,2026-10-15T14:56:39
+sample 3.1,16,elongated,,FT,2026-10-14T18:10:49
+sample 3.1,17,elongated,,FT,2026-10-15T14:56:40
+sample 3.1,19,elongated,,FT,2026-10-14T18:07:44
+sample 3.1,22,blob/outlier,,FT,2026-10-14T18:07:14
+sample 3.1,26,unsure,,FT,2026-10-15T14:56:42
+sample 3.1,27,elongated,,FT,2026-10-14T18:07:15
+sample 3.1,35,elongated,,FT,2026-10-15T14:56:44
+sample 3.1,41,unsure,,FT,2026-10-15T14:56:46
+sample 3.1,43,elongated,,FT,2026-10-14T18:03:03
+sample 3.1,46,elongated,,FT,2026-10-15T14:56:47
+sample 3.1,48,blob/outlier,,FT,2026-10-14T18:07:48
+sample 3.2,9,elongated,,FT,2026-10-14T18:04:34
+sample 3.2,13,elongated,,FT,2026-10-14T18:03:28
+sample 3.2,15,elongated,,FT,2026-10-14T18:06:57
+sample 3.2,19,blob/outlier,,FT,2026-10-14T18:07:26
+sample 3.2,23,elongated,,FT,2026-10-14T18:10:02
+sample 3.2,27,elongated,,FT,2026-10-14T18:07:19
+sample 3.2,29,elongated,,FT,2026-10-14T18:05:20
+sample 3.2,30,elongated,,FT,2026-10-15T14:56:47
+sample 3.2,35,elongated,,FT,2026-10-15T14:56:48
+sample 3.2,36,unsure,,FT,2026-10-15T14:56:49
+sample 3.2,47,elongated,,FT,2026-10-14T18:10:50
+sample 3.2,49,elongated,,FT,2026-10-15T14:56:50
+sample 3.2,54,elongated,,FT,2026-10-15T14:56:51
+sample 3.2,57,unsure,,FT,2026-10-15T14:56:52
+sample 3.2,60,elongated,,FT,2026-10-14T18:09:45
+sample 3.2,61,elongated,,FT,2026-10-15T14:56:53
+sample 3.2,63,elongated,,FT,2026-10-14T18:03:46
+sample 3.2,64,elongated,,FT,2026-10-15T14:56:54
+sample 3.2,71,blob/outlier,,FT,2026-10-14T18:06:34
+sample 3.2,76,blob/outlier,,FT,2026-10-14T18:10:12
+sample 3.2,87,blob/outlier,,FT,2026-10-14T18:06:02
+sample 3.2,88,elongated,,FT,2026-10-15T14:27:40
+sample 3.2,94,elongated,,FT,2026-10-14T18:04:26
+sample 3.2,101,elongated,,FT,2026-10-14T18:04:33
+sample 3.2,106,elongated,,FT,2026-10-15T14:56:55
+sample 3.2,115,unsure,,FT,2026-10-15T14:56:59
+sample 3.2,119,elongated,,FT,2026-10-15T14:57:00
+sample 4.1,10,round,,FT,2026-10-15T14:57:07
+sample 4.1,11,round,,FT,2026-10-14T18:10:08
+sample 4.1,12,blob/outlier,,FT,2026-10-14T18:06:29
+sample 4.1,16,blob/outlier,,FT,2026-10-14T18:10:55
+sample 4.1,24,elongated,,FT,2026-10-14T18:10:15
+sample 4.1,36,elongated,,FT,2026-10-14T18:06:23
+sample 4.1,41,round,,FT,2026-10-14T18:07:08
+sample 4.1,44,elongated,,FT,2026-10-15T14:27:45
+sample 4.1,49,round,,FT,2026-10-14T18:07:11
+smple 1.2,3,elongated,,FT,2026-10-15T14:57:10
+smple 1.2,24,unsure,,FT,2026-10-15T14:57:17
+smple 1.2,28,unsure,,FT,2026-10-15T14:57:19
+smple 1.2,43,elongated,,FT,2026-10-14T18:06:28
+smple 1.2,46,round,,FT,2026-10-14T18:06:44
+smple 1.2,47,round,,FT,2026-10-14T18:11:01
+smple 1.2,48,elongated,,FT,2026-10-15T14:57:20
+smple 1.2,51,elongated,,FT,2026-10-14T18:06:40
+smple 1.2,52,elongated,,FT,2026-10-15T14:27:39
+smple 1.2,54,round,,FT,2026-10-15T14:57:21
+smple 1.2,58,round,,FT,2026-10-14T18:10:32
+smple 1.2,62,elongated,,FT,2026-10-14T18:03:00
+smple 1.2,68,elongated,,FT,2026-10-14T18:03:09
+smple 1.2,83,round,,FT,2026-10-14T18:10:31
+smple 1.2,84,round,,FT,2026-10-14T18:06:55

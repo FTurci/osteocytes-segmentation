@@ -1,6 +1,6 @@
 series        smple 1.2
-file          Texas red 20min_24.8.2026.lif
-written       2026-10-07T14:27:38
+file          /Users/ft14968/Projects/osteo-track/lif-files/New_data_sept2026/Texas red 20min_24.8.2026.lif
+written       2026-10-14T17:34:26
 voxel size    0.48147 µm (cubic; raw z step 0.30279 µm)
 volume        (48, 512, 512) voxels (z, y, x) = 23.1 x 246.5 x 246.5 µm
 
@@ -20,6 +20,9 @@ nuclei (cleaned ch0)                                                           5
     labelled, rejected                                                         16
     no ch1 label                                                               10
   inside hull, not labelled as osteocyte (rejected + no ch1)                   26
+protrusions reaching >= 2.0 µm                                                146
+  dendrites (rods, counted)                                                   146
+  flat parts of the body (sheets, not counted)                                  0
 
 == surviving osteocytes
 volume              mean 1519.8  sd 775.1 µm³
@@ -52,9 +55,12 @@ dendrite path       mean 9.61  sd 10.62 µm
  "DENDRITE_BODY_RADIUS": 2,
  "DENDRITE_COUNT_REACH_UM": 2.0,
  "DENDRITE_SPUR_UM": 1.5,
+ "DENDRITE_SHEET_MIN_LINEARITY": 0.65,
+ "DENDRITE_SHEET_MAX_PLANARITY": 0.25,
  "NUCLEUS_OPACITY": 0.35,
  "SAVE_TIFS": false,
  "SAVE_MESHES": false,
+ "SAVE_VALIDATION": true,
  "SAVE_RENDERINGS": true,
  "RENDER_PAD": 5,
  "RENDER_FRAMES": 36,

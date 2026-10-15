@@ -1,0 +1,173 @@
+series,label,tag,review,phenotype,p_round,p_round_cv,predicted
+sample 1.1,3,unsure,real but dirty,,0.6040406990096805,,round
+sample 1.1,15,elongated,,elongated,0.6427780564692875,0.8893550541299206,round
+sample 1.1,19,blob/outlier,real (clean),,0.2960680165822158,,elongated
+sample 1.1,26,elongated,,elongated,0.1027144289781416,0.19269486390325957,elongated
+sample 1.1,27,round,,round,0.6831077961658713,0.6960761235805164,round
+sample 1.1,29,elongated,,elongated,0.4615992520422664,0.4691053076154977,elongated
+sample 1.1,33,round,,round,0.8885127146195388,0.9517939442332913,round
+sample 1.1,34,blob/outlier,real but dirty,,0.9474139373272287,,round
+sample 1.1,36,blob/outlier,real but dirty,,0.08783827429407559,,elongated
+sample 1.1,37,round,,round,0.9840566479569578,0.9954323455449929,round
+sample 1.1,46,blob/outlier,real but dirty,,0.2744125747739464,,elongated
+sample 1.1,49,elongated,,elongated,0.30507013981179487,0.2359609000840592,elongated
+sample 1.1,59,blob/outlier,real but dirty,,0.036750497092692624,,elongated
+sample 1.1,64,blob/outlier,real but dirty,,0.6101381297576968,,round
+sample 1.1,69,round,,round,0.5709878359961421,0.46970713003220016,round
+sample 1.1,71,blob/outlier,real but dirty,,0.06556164130709997,,elongated
+sample 1.1,84,elongated,,elongated,0.1347161393408387,0.1948017850319883,elongated
+sample 1.1,85,elongated,,elongated,0.6142280704122037,0.7187885296036873,round
+sample 1.1,86,round,,round,0.1466162743993912,0.08745720621707899,elongated
+sample 1.1,88,blob/outlier,real (clean),,0.029564327655115838,,elongated
+sample 1.1,96,blob/outlier,real but dirty,,0.9685808784284485,,round
+sample 1.1,105,blob/outlier,real but dirty,,0.8974120889229246,,round
+sample 1.1,106,blob/outlier,real but dirty,,0.24119444058490502,,elongated
+sample 1.1,110,blob/outlier,real but dirty,,0.15727112060967116,,elongated
+sample 1.1,111,elongated,,elongated,0.6119596563799633,0.670859974148893,round
+sample 1.1,116,round,,round,0.6642388419350784,0.6792174033456735,round
+sample 1.1,119,unsure,real (clean),,0.32524786534845807,,elongated
+sample 1.1,130,unsure,real (clean),,0.5682940979857009,,round
+sample 1.1,141,elongated,,elongated,0.9608544542306866,0.9984632799591581,round
+sample 1.1,146,blob/outlier,real but dirty,,0.20911377316057805,,elongated
+sample 1.1,150,blob/outlier,real (clean),,0.9853157189557185,,round
+sample 1.1,151,round,,round,0.969490757207246,0.997709442626447,round
+sample 1.1,156,unsure,real (clean),,0.6407649528322296,,round
+sample 1.1,190,elongated,real but dirty,elongated,0.5535979672172774,0.799037517646879,round
+sample 1.1,228,blob/outlier,real but dirty,,0.9581840919396878,,round
+sample 1.1,231,blob/outlier,real but dirty,,0.3874092591407695,,elongated
+sample 1.3,20,blob/outlier,real (clean),,0.4506343738712778,,elongated
+sample 1.3,27,round,,round,0.8178256128656475,0.7932144956581468,round
+sample 1.3,29,blob/outlier,real but dirty,,0.8781729524985409,,round
+sample 1.3,34,elongated,,elongated,0.29710569641111184,0.381678509724028,elongated
+sample 1.3,42,round,,round,0.861276152689746,0.7985976403950523,round
+sample 1.3,46,round,,round,0.9371607586130346,0.927201943456168,round
+sample 1.3,50,blob/outlier,real but dirty,,0.6224358468078347,,round
+sample 1.3,55,blob/outlier,real but dirty,,0.0869168316111672,,elongated
+sample 1.3,58,elongated,,elongated,0.4072872195845087,0.46132393215140344,elongated
+sample 1.3,63,round,,round,0.859782875820697,0.828070445290805,round
+sample 1.3,75,elongated,,elongated,0.27612493220435946,0.3136999715402004,elongated
+sample 1.3,80,round,,round,0.9592427328144925,0.950525540011588,round
+sample 1.3,83,blob/outlier,real but dirty,,0.6417126551520914,,round
+sample 1.3,84,round,,round,0.7744464010860025,0.6772959311582174,round
+sample 1.4,24,blob/outlier,real but dirty,,0.40150500081187346,,elongated
+sample 1.4,27,round,,round,0.7957216872621578,0.879971174786863,round
+sample 1.4,36,round,,round,0.919376813167677,0.8156250001500763,round
+sample 1.4,37,round,,round,0.36352091089210603,0.40724530992551333,elongated
+sample 1.4,38,blob/outlier,real but dirty,,0.5025693427924321,,round
+sample 1.4,43,round,,round,0.3324259492662451,0.11637795778718814,elongated
+sample 1.4,44,round,,round,0.7828277973227612,0.8604493638144749,round
+sample 1.4,47,elongated,,elongated,0.3576447456040064,0.40129073096095924,elongated
+sample 1.4,52,elongated,,elongated,0.1755249901659842,0.1678913485428554,elongated
+sample 1.4,55,round,,round,0.5200920759004776,0.3731234927991742,round
+sample 1.4,57,blob/outlier,real but dirty,,0.707503386842592,,round
+sample 1.4,60,elongated,,elongated,0.12002383688674031,0.21825058544102072,elongated
+sample 1.4,62,elongated,,elongated,0.4378874509273221,0.5190391747879288,elongated
+sample 1.4,65,elongated,,elongated,0.09326431735491292,0.08162885658495427,elongated
+sample 1.4,71,elongated,,elongated,0.5001661482495631,0.7174880588130683,round
+sample 1.4,76,blob/outlier,real but dirty,,0.9323312490194031,,round
+sample 1.4,82,round,,round,0.9825489323605087,0.9757855647876168,round
+sample 1.4,84,blob/outlier,real (clean),,0.5236026927045716,,round
+sample 1.4,91,blob/outlier,real (clean),,0.5256890952262742,,round
+sample 1.4,95,round,,round,0.830033971823232,0.8608646112313706,round
+sample 1.4,99,elongated,,elongated,0.5999788957042804,0.5784101786377016,round
+sample 1.4,108,round,,round,0.8013823352732128,0.740630768057804,round
+sample 1.4,122,blob/outlier,unsure,,0.09105226715248933,,elongated
+sample 1.4,123,round,,round,0.29737708141180413,0.23926103248659308,elongated
+sample 1.4,125,elongated,,elongated,0.3538903775656532,0.3749441961578695,elongated
+sample 1.4,128,blob/outlier,real (clean),,0.10328639145855549,,elongated
+sample 1.4,131,blob/outlier,real but dirty,,0.22489691192509967,,elongated
+sample 1.4,136,blob/outlier,real (clean),,0.11482584401152711,,elongated
+sample 1.4,157,round,,round,0.914402830148322,0.8705731582811191,round
+sample 1.4,160,elongated,,elongated,0.27115631459155687,0.2817740077319591,elongated
+sample 1.4,163,round,,round,0.957006668993105,0.9121537970163237,round
+sample 1.4,170,round,,round,0.7574466678577012,0.5555933149718577,round
+sample 1.4,173,elongated,,elongated,0.683404041585581,0.6591526148259458,round
+sample 1.4,184,blob/outlier,real but dirty,,0.02784779595951,,elongated
+sample 1.4,218,elongated,,elongated,0.3598515832064687,0.39927247414384115,elongated
+sample 1.4,234,elongated,,elongated,0.1889253428586861,0.11579735023727297,elongated
+sample 1.4,244,blob/outlier,real but dirty,,0.9546926258822988,,round
+sample 2.1_ultrasonic cleaned,18,round,,round,0.2221071363560743,0.11963289745872847,elongated
+sample 2.1_ultrasonic cleaned,21,elongated,,elongated,0.07714971845948916,0.06104495041711861,elongated
+sample 2.1_ultrasonic cleaned,23,blob/outlier,real but dirty,,0.5069153111487633,,round
+sample 2.1_ultrasonic cleaned,26,elongated,,elongated,0.17032288542477222,0.1494320420132894,elongated
+sample 2.1_ultrasonic cleaned,37,elongated,,elongated,0.2968366329170796,0.32609598875479,elongated
+sample 2.1_ultrasonic cleaned,38,elongated,,elongated,0.5870261283820299,0.725696199810922,round
+sample 2.1_ultrasonic cleaned,39,elongated,,elongated,0.22887377330994285,0.22337768105455683,elongated
+sample 2.1_ultrasonic cleaned,47,blob/outlier,real but dirty,,0.20849942307305175,,elongated
+sample 2.1_ultrasonic cleaned,55,round,,round,0.7629010992809683,0.7188095627628801,round
+sample 2.1_ultrasonic cleaned,61,elongated,,elongated,0.14286223607082468,0.07995988016487343,elongated
+sample 2.1_ultrasonic cleaned,74,blob/outlier,real but dirty,,0.2750741706523757,,elongated
+sample 2.1_ultrasonic cleaned,77,elongated,,elongated,0.2356846496591356,0.2226043322628007,elongated
+sample 2.1_ultrasonic cleaned,82,elongated,,elongated,0.03525647266942476,0.02217619544225401,elongated
+sample 2.1_ultrasonic cleaned,87,round,,round,0.4575665880508329,0.23824838169933993,elongated
+sample 2.1_ultrasonic cleaned,117,round,,round,0.4201257592170423,0.29541807221561456,elongated
+sample 2.1_ultrasonic cleaned,124,elongated,,elongated,0.6447089953563703,0.6902708715458062,round
+sample 2.1_ultrasonic cleaned,134,elongated,,elongated,0.06434911494629615,0.03161881148422254,elongated
+sample 2.1_ultrasonic cleaned,140,elongated,,elongated,0.15407048903991938,0.20692320255188598,elongated
+sample 2.1_ultrasonic cleaned,150,elongated,,elongated,0.11359745715994111,0.13847568775134542,elongated
+sample 2.1_ultrasonic cleaned,160,elongated,,elongated,0.33403168584084675,0.30154794917413524,elongated
+sample 3.1,1,elongated,,elongated,0.018360636321093332,0.021211021428624563,elongated
+sample 3.1,2,round,,round,0.6519693491297981,0.518316240106315,round
+sample 3.1,3,blob/outlier,real but dirty,,0.023071050062935826,,elongated
+sample 3.1,5,elongated,,elongated,0.08814751771862786,0.0910816992634783,elongated
+sample 3.1,6,round,,round,0.21267594476991436,0.18882045443476683,elongated
+sample 3.1,7,elongated,,elongated,0.053943606341422465,0.06170412128927841,elongated
+sample 3.1,8,elongated,,elongated,0.3978154974581049,0.4330282419037264,elongated
+sample 3.1,10,elongated,,elongated,0.3722392950119548,0.3767021309042037,elongated
+sample 3.1,12,elongated,,elongated,0.16938158891073166,0.16293333042818697,elongated
+sample 3.1,13,elongated,,elongated,0.42485869110230523,0.360733649935369,elongated
+sample 3.1,14,blob/outlier,real but dirty,,0.009937412342315925,,elongated
+sample 3.1,16,elongated,,elongated,0.016861388278210217,0.02123054144102864,elongated
+sample 3.1,17,blob/outlier,real (clean),,0.13949363797346986,,elongated
+sample 3.1,19,elongated,,elongated,0.3274368890050964,0.33180750269700865,elongated
+sample 3.1,26,blob/outlier,real but dirty,,0.3450051851268483,,elongated
+sample 3.1,27,elongated,,elongated,0.1794707112958357,0.1602717067431816,elongated
+sample 3.1,35,blob/outlier,real (clean),,0.20145574555102996,,elongated
+sample 3.1,41,blob/outlier,real (clean),,0.005284974722658073,,elongated
+sample 3.1,43,elongated,,elongated,0.15839141795465173,0.29606724826402503,elongated
+sample 3.1,46,blob/outlier,real but dirty,,0.03645103858762774,,elongated
+sample 3.2,9,elongated,,elongated,0.09161075733211525,0.09535087722863998,elongated
+sample 3.2,13,elongated,,elongated,0.31251684303975685,0.2965853373253722,elongated
+sample 3.2,15,elongated,,elongated,0.37052349099943166,0.4508692882897394,elongated
+sample 3.2,23,elongated,,elongated,0.16119757989703049,0.16827545953104386,elongated
+sample 3.2,27,elongated,,elongated,0.5932250682617469,0.6574655752985521,round
+sample 3.2,29,elongated,,elongated,0.5095604633320521,0.4863113310059063,round
+sample 3.2,30,blob/outlier,real (clean),,0.060359177511960294,,elongated
+sample 3.2,35,blob/outlier,real (clean),,0.019653900749126173,,elongated
+sample 3.2,36,blob/outlier,real but dirty,,0.6792349949807046,,round
+sample 3.2,47,elongated,,elongated,0.029771153955945196,0.034059286113669596,elongated
+sample 3.2,49,blob/outlier,real (clean),,0.1021372134067558,,elongated
+sample 3.2,54,blob/outlier,real (clean),,0.5072196851196265,,round
+sample 3.2,57,blob/outlier,real but dirty,,0.28124717856602227,,elongated
+sample 3.2,60,elongated,,elongated,0.04403732018993899,0.05016564835375815,elongated
+sample 3.2,61,blob/outlier,real (clean),,0.14395899668996337,,elongated
+sample 3.2,63,elongated,,elongated,0.008218282941849061,0.00986380115782115,elongated
+sample 3.2,64,blob/outlier,real but dirty,,0.08981613852476762,,elongated
+sample 3.2,88,elongated,real but dirty,elongated,0.11674241465308677,0.10384303979475132,elongated
+sample 3.2,94,elongated,,elongated,0.25202566416603556,0.29235948356450714,elongated
+sample 3.2,101,elongated,,elongated,0.08174036738770207,0.10862530385814308,elongated
+sample 3.2,106,blob/outlier,real (clean),,0.1421034697179061,,elongated
+sample 3.2,115,blob/outlier,real but dirty,,0.31842464642981394,,elongated
+sample 3.2,119,blob/outlier,real but dirty,,0.0494719796014419,,elongated
+sample 4.1,10,blob/outlier,real but dirty,,0.9401714688311328,,round
+sample 4.1,11,round,,round,0.7674413385175289,0.7401496887536863,round
+sample 4.1,24,elongated,,elongated,0.39366554955185273,0.40419915154195324,elongated
+sample 4.1,36,elongated,,elongated,0.4537077023706206,0.4376563911223484,elongated
+sample 4.1,41,round,,round,0.676317790151279,0.6032644214904092,round
+sample 4.1,44,elongated,,elongated,0.3229489942464772,0.31350996369736794,elongated
+sample 4.1,49,round,,round,0.44954869149918203,0.38520129927774593,elongated
+smple 1.2,3,blob/outlier,real but dirty,,0.2050780334294608,,elongated
+smple 1.2,24,blob/outlier,real but dirty,,0.5514976519384557,,round
+smple 1.2,28,blob/outlier,real but dirty,,0.12124035463916122,,elongated
+smple 1.2,43,elongated,,elongated,0.057893926146134415,0.07542900932955937,elongated
+smple 1.2,46,round,,round,0.9723183450559034,0.9681092461920867,round
+smple 1.2,47,round,,round,0.8130572157300824,0.7752426868187902,round
+smple 1.2,48,blob/outlier,real (clean),,0.06021614106763726,,elongated
+smple 1.2,51,elongated,,elongated,0.6005977252684007,0.6299548309459467,round
+smple 1.2,52,elongated,real (clean),elongated,0.1287672121558439,0.17934709037327606,elongated
+smple 1.2,54,unsure,real (clean),,0.5775712032932744,,round
+smple 1.2,58,round,,round,0.9431089599706326,0.9396121468397894,round
+smple 1.2,62,elongated,,elongated,0.25657906076154524,0.33223948527581676,elongated
+smple 1.2,68,elongated,,elongated,0.36636108971443837,0.3929875589792463,elongated
+smple 1.2,83,round,,round,0.948333123605562,0.9354629646755034,round
+smple 1.2,84,round,,round,0.5950396692388742,0.5633587464703222,round

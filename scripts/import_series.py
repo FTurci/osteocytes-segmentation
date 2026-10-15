@@ -3,14 +3,15 @@
     python scripts/import_series.py <export_root> "<series name>" [--no-obj]
 
 <export_root> is the folder in which segment_pipeline_interactive.ipynb wrote
-tables_series_<tag>/, osteocytes_obj_series_<tag>/ and renderings_series_<tag>/.
+tables_series_<tag>/, osteocytes_obj_series_<tag>/, renderings_series_<tag>/ and validation_series_<tag>/.
 data/<tag>/ is replaced as a whole, so cells dropped by a new export do not linger.
 
 Writes scene.glb (osteocytes + translucent nuclei; the page toggles the nuclei), one GLB per cell,
-the rendered GIF/PNG per cell, the tables, and the original scene OBJ/MTL files zipped as scene_obj.zip,
+the rendered GIF/PNG and the dendrite-validation GIF/PNG per cell, the tables, and the original scene OBJ/MTL files zipped as scene_obj.zip,
 then regenerates the site pages (scripts/build_pages.py).
 """
 import argparse
+import csv
 import json
 import shutil
 import zipfile
@@ -92,6 +93,7 @@ def main():
     tables = args.export_root / f"tables_series_{tag}"
     objs = args.export_root / f"osteocytes_obj_series_{tag}"
     renders = args.export_root / f"renderings_series_{tag}"
+    validation = args.export_root / f"validation_series_{tag}"
     meta = json.loads((tables / "summary.json").read_text())
     assert meta["series"] == args.series, f"{tables} holds {meta['series']!r}, not {args.series!r}"
 
@@ -116,10 +118,20 @@ def main():
                 for ext in (".obj", ".mtl"):
                     z.write(objs / f"{scene}{ext}", f"{tag}_{scene}{ext}")
 
+    # only the cells of this export: the rendering folders keep files of labels from earlier exports
+    with open(tables / "osteocyte_props.csv", newline="") as f:
+        labels = {int(float(r["label"])) for r in csv.DictReader(f)}
     n_images = 0
-    for image in list(renders.glob("osteocyte_*_rotation.gif")) + list(renders.glob("osteocyte_*_mip.png")):
-        shutil.copy2(image, out / "cells" / image.name)
-        n_images += 1
+    for folder, suffixes in [(renders, ["_rotation.gif", "_mip.png"]), (validation, ["_dendrites.gif", "_dendrites.png"])]:
+        for label in labels:
+            for suffix in suffixes:
+                image = folder / f"osteocyte_{label}{suffix}"
+                if image.exists():
+                    shutil.copy2(image, out / "cells" / image.name)
+                    n_images += 1
+    if not validation.is_dir():
+        print(f"no {validation.name}/ (exported with SAVE_VALIDATION off, or before it existed): "
+              "the cell dialogs will show the mesh only")
 
     size = sum(f.stat().st_size for f in out.rglob("*") if f.is_file()) / 1e6
     print(f"{args.series} -> {out.relative_to(ROOT)}: {len(list((out / 'cells').glob('*.glb')))} cell meshes, "

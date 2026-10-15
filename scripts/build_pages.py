@@ -62,8 +62,11 @@ def gallery(tag, rows):
         picture = (f'<img src="../data/{tag}/cells/{image}" loading="lazy" alt="osteocyte {label}">' if image
                    else '<div class="no-image">no rendering</div>')
         caption = f"#{label} · {fmt(r['volume_um3'])} µm³ · {r['n_dendrites']} dendrites"
-        cards.append(f'<figure class="cell-card" data-glb="../data/{tag}/cells/osteocyte_{label}.glb" '
-                     f'data-title="osteocyte {label}">{picture}<figcaption>{caption}</figcaption></figure>')
+        validation = (f' data-validation="../data/{tag}/cells/osteocyte_{label}_dendrites"'
+                      if (cell / f"osteocyte_{label}_dendrites.gif").exists() else "")
+        cards.append(f'<figure class="cell-card" data-glb="../data/{tag}/cells/osteocyte_{label}.glb"{validation} '
+                     f'data-title="osteocyte {label}: {r["n_dendrites"]} dendrites">{picture}'
+                     f'<figcaption>{caption}</figcaption></figure>')
     return '<div class="gallery">\n' + "\n".join(cards) + "\n</div>"
 
 
@@ -109,12 +112,21 @@ with and without the nuclei.
 
 ## Gallery
 
-Rotating maximum-intensity projections of ch1 inside each osteocyte. Click a cell for its 3D mesh.
+Rotating maximum-intensity projections of ch1 inside each osteocyte. Click a cell for its 3D mesh and the
+check of its dendrite count: ch1 inside the cell (left) beside the detection (right) as a depth-shaded surface,
+rotating, with the cell body grey, counted dendrites blue, flat parts of the body green and short protrusions orange.
 
 ```{{=html}}
 {gallery(tag, rows)}
 <dialog id="cell-dialog"><form method="dialog"><button class="close" aria-label="close">×</button></form>
-<h3 class="cell-title"></h3><model-viewer camera-controls interaction-prompt="none" shadow-intensity="0" class="cell-viewer"></model-viewer></dialog>
+<h3 class="cell-title"></h3>
+<div class="cell-panels">
+<model-viewer camera-controls interaction-prompt="none" shadow-intensity="0" class="cell-viewer"></model-viewer>
+<figure class="cell-validation"><img alt="dendrite detection, rotating">
+<figcaption><span class="key" style="--c:#9a9893"></span>body <span class="key" style="--c:#2a78d6"></span>dendrite (counted)
+<span class="key" style="--c:#1baf7a"></span>flat part of the body <span class="key" style="--c:#eb6834"></span>short protrusion
+· <a class="validation-png" target="_blank">projections (PNG)</a></figcaption></figure>
+</div></dialog>
 ```
 """
 
